@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./App.css";
-import MyDocument from "./components/Cv";
-import Forms from "./components/Form";
+import "../App.css";
+import MyDocument from "../components/Cv";
+import Forms from "../components/Form";
 
 function App() {
   const [personalInfo, setPersonalInfo] = useState({
