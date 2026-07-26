@@ -60,7 +60,7 @@ function ResumePageScaler({ children }) {
 }
 
 export function Resume() {
-  const { personalInfo } = useResume()
+  const { personalInfo, education } = useResume()
   
   return (
     <ResumePageScaler>
@@ -80,10 +80,24 @@ export function Resume() {
               <a href={personalInfo.linkedin} className="underline">LinkedIn</a>
             </div>
           </header>
-          <section>
-            <h3 className="font-extralight text-xm font-serif">Education</h3>
+          <section className="flex flex-col gap-1">
+            <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Education</h3>
             <hr className="border-black" />
-            
+            {console.log(education)}
+            {
+              education.map(item => (
+                <div className="flex flex-col">
+                  <div className="flex justify-between text-sm font-serif font-semibold">
+                    <h4>{item.school}</h4>
+                    <span className="font-sans">{item.startDate} - {item.endDate}</span>
+                  </div>
+                  <div className="flex justify-between text-sm font-serif italic font-extralight opacity-90">
+                    <h4>{item.degree}</h4>
+                    <span>{item.location}</span>
+                  </div>
+                </div>
+              ))
+            }
           </section>
         </main>
       </div>
