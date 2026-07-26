@@ -1,63 +1,52 @@
 import { useState } from "react";
 import Option from "./Option";
+import { useResume } from "@/context/ResumeContext";
 
-function EducationInfo({ onSubmit, isActive, onToggle }) {
-  const [data, setData] = useState([
-    {
-      university: "auc",
-      field: "computer scince degree",
-      degree: "Certificate",
-      date: "May 2023",
-    },
-  ]);
+function EducationInfo({ isActive, onToggle }) {
+  const { education, dispatchEducation } = useResume();
 
-  const [university, setUniversity] = useState("");
+  const [school, setSchool] = useState("");
+  const [location, setLocation] = useState("");
   const [degree, setDegree] = useState("");
-  const [field, setField] = useState("");
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const [state, setState] = useState("normal");
 
-  function onSave() {
-    onSubmit(data);
+  function resetStates() {
+    setState("normal")
+
+    setSchool("")
+    setLocation("")
+    setDegree("")
+    setStartDate("")
+    setEndDate("")
   }
 
   function handleOptionClick(index) {
-    setUniversity(data[index].university);
-    setDegree(data[index].degree);
-    setField(data[index].field);
-    setDate(data[index].date);
+    setSchool(education[index].school);
+    setLocation(education[index].location);
+    setDegree(education[index].degree);
+    setStartDate(education[index].startDate);
+    setEndDate(education[index].endDate);
     setState(index);
   }
 
   function handleOptionDelete(index) {
-    const updated = [...data];
-    updated[index].display = "none";
-    setData(updated);
-    setState("normal");
+    dispatchEducation({type: "REMOVE", payload: { index }})
   }
 
-  function handleFormSubmit(e) {
+  function handleEducationCreate(e) {
     e.preventDefault();
-    const newEd = { university, degree, date, field };
-    setData([...data, newEd]);
-    setState("normal");
-    setUniversity("");
-    setDegree("");
-    setDate("");
-    setField("");
+    const newEducation = { school, location, degree ,startDate, endDate };
+    dispatchEducation({type: "ADD", payload: newEducation})
+    resetStates()
   }
 
   function handleEditSubmit(e) {
     e.preventDefault();
-    const updated = [...data];
-    updated[state] = { university, degree, field, date };
-    setData(updated);
-    setUniversity("");
-    setDegree("");
-    setDate("");
-    setField("");
-    setState("normal");
+    dispatchEducation({type: "UPDATE", payload: { index: state, school, location, degree, startDate, endDate }})
+    resetStates()
   }
 
   return (
@@ -74,7 +63,7 @@ function EducationInfo({ onSubmit, isActive, onToggle }) {
         {state === "normal" ? (
           <>
             <div className="options">
-              {data.map((item, index) => (
+              {education.map((item, index) => (
                 <Option
                   display={item.display || "block"}
                   key={index}
@@ -89,30 +78,27 @@ function EducationInfo({ onSubmit, isActive, onToggle }) {
               <button onClick={() => setState("new")} className="save-btn">
                 New
               </button>
-              <button className="save-btn" onClick={onSave}>
-                Save
-              </button>
             </div>
           </>
         ) : state === "new" ? (
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleEducationCreate}>
             <div className="form-flex">
               <label htmlFor="">
-                University
+                School
                 <input
                   required
                   type="text"
-                  value={university}
-                  onChange={(e) => setUniversity(e.target.value)}
+                  value={school}
+                  onChange={(e) => setSchool(e.target.value)}
                 />
               </label>
               <label htmlFor="">
-                Field of Study
+                Location
                 <input
                   required
                   type="text"
-                  value={field}
-                  onChange={(e) => setField(e.target.value)}
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </label>
               <label htmlFor="">
@@ -124,26 +110,29 @@ function EducationInfo({ onSubmit, isActive, onToggle }) {
                   onChange={(e) => setDegree(e.target.value)}
                 />
               </label>
-              <label htmlFor="">
+              <label>
+                Start Date
+                <input
+                  required
+                  type="text"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </label>
+              <label>
                 Graduation Date
                 <input
                   required
                   type="text"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
                 />
               </label>
             </div>
             <div className="btns-flex">
               <button
                 type="button"
-                onClick={() => {
-                  setState("normal");
-                  setDegree("");
-                  setUniversity("");
-                  setDate("");
-                  setField("");
-                }}
+                onClick={() => resetStates()}
                 className="save-btn"
               >
                 Cansle
@@ -155,21 +144,21 @@ function EducationInfo({ onSubmit, isActive, onToggle }) {
           <form onSubmit={handleEditSubmit}>
             <div className="form-flex">
               <label htmlFor="">
-                University
+                School
                 <input
                   required
                   type="text"
-                  value={university}
-                  onChange={(e) => setUniversity(e.target.value)}
+                  value={school}
+                  onChange={(e) => setSchool(e.target.value)}
                 />
               </label>
               <label htmlFor="">
-                Field of Study
+                Location
                 <input
                   required
                   type="text"
-                  value={field}
-                  onChange={(e) => setField(e.target.value)}
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </label>
               <label htmlFor="">
@@ -181,13 +170,22 @@ function EducationInfo({ onSubmit, isActive, onToggle }) {
                   onChange={(e) => setDegree(e.target.value)}
                 />
               </label>
-              <label htmlFor="">
+              <label>
+                Start Date
+                <input
+                  required
+                  type="text"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </label>
+              <label>
                 Graduation Date
                 <input
                   required
                   type="text"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
                 />
               </label>
             </div>
@@ -195,13 +193,7 @@ function EducationInfo({ onSubmit, isActive, onToggle }) {
               <button
                 className="save-btn"
                 type="button"
-                onClick={() => {
-                  setState("normal");
-                  setDegree("");
-                  setUniversity("");
-                  setDate("");
-                  setField("");
-                }}
+                onClick={() => {resetStates()}}
               >
                 Cancel
               </button>
