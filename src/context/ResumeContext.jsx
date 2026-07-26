@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { publicReducer } from "@/reducers/educationReducer";
+import { createContext, useContext, useReducer, useState } from "react";
 
 const ResumeContext = createContext(null);
 
@@ -11,7 +12,22 @@ export function ResumeProvider({ children }) {
     linkedin: "https://www.linkedin.com/in/saul-goodman-254762276/",
   })
 
-  const value = { personalInfo, setPersonalInfo }
+  const [education, dispatchEducation] = useReducer(publicReducer , [
+    {
+      school: "Albuquerque community college",
+      location: "Albuquerque",
+      degree: "Bachelor of law",
+      startDate: "18-6-1978",
+      endDate: "18-6-1980",
+    },
+  ])
+
+  const value = { 
+    personalInfo,
+    setPersonalInfo,
+    education,
+    dispatchEducation,
+  }
   
   return (
     <ResumeContext.Provider value={value}>
