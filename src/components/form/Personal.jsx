@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { useResume } from "@/context/ResumeContext.jsx";
 
-function PersonalInfo({ onSubmit, onToggle, isActive }) {
-  const [fullName, setFullName] = useState("Thomas Yacoub");
-  const [phoneNumber, setPhoneNumber] = useState("010945");
-  const [email, setEmail] = useState("thomas@gmail.com");
-  const [gitHubUrl, setGitHubUrl] = useState("https://github.com");
+function PersonalInfo({ onToggle, isActive }) {
+  const resumeData = useResume();
+
+  const [name, setName] = useState(resumeData.personalInfo.name);
+  const [phone, setPhone] = useState(resumeData.personalInfo.phone);
+  const [email, setEmail] = useState(resumeData.personalInfo.email);
+  const [github, setGithub] = useState(resumeData.personalInfo.github);
+  const [linkedin, setLinkedin] = useState(resumeData.personalInfo.linkedin);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const data = { fullName, phoneNumber, email, gitHubUrl };
+    const data = { name, phone, email, github, linkedin };
 
-    onSubmit(data);
+    resumeData.setPersonalInfo(data);
   }
 
   return (
@@ -34,8 +38,8 @@ function PersonalInfo({ onSubmit, onToggle, isActive }) {
             <input
               required
               type="text"
-              onChange={(e) => setFullName(e.target.value)}
-              value={fullName}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
             />
           </label>
           <label htmlFor="">
@@ -43,8 +47,8 @@ function PersonalInfo({ onSubmit, onToggle, isActive }) {
             <input
               required
               type="text"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              value={phoneNumber}
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
             />
           </label>
           <label>
@@ -61,8 +65,17 @@ function PersonalInfo({ onSubmit, onToggle, isActive }) {
             <input
               required
               type="url"
-              onChange={(e) => setGitHubUrl(e.target.value)}
-              value={gitHubUrl}
+              onChange={(e) => setGithub(e.target.value)}
+              value={github}
+            />
+          </label>
+          <label>
+            LinkedIn Url
+            <input
+              required
+              type="url"
+              onChange={(e) => setLinkedin(e.target.value)}
+              value={linkedin}
             />
           </label>
         </div>
