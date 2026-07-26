@@ -3,9 +3,12 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router.jsx";
+import { ResumeProvider } from "./context/ResumeContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ResumeProvider>
+      <RouterProvider router={router} />
+    </ResumeProvider>
   </StrictMode>
 );
