@@ -74,7 +74,7 @@ export function Resume() {
               {personalInfo.name}
             </h2>
             <div className="flex gap-1 text-[10.5px] font-serif justify-center">
-              <span className="font-sans">{personalInfo.phone}</span>
+              <span>{personalInfo.phone}</span>
               <Separator />
               <a href={personalInfo.email} className="underline">{personalInfo.email}</a>
               <Separator />
@@ -86,75 +86,81 @@ export function Resume() {
           <section className="flex flex-col gap-1">
             <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Education</h3>
             <hr className="border-black" />
-            {
-              education.map(item => (
-                <div className="flex flex-col">
-                  <div className="flex justify-between text-sm font-serif font-semibold">
-                    <h4>{item.school}</h4>
-                    <span className="font-sans">{item.startDate} - {item.endDate}</span>
+            <div className="flex flex-col gap-1 pl-4">
+              {
+                education.map(item => (
+                  <div className="flex flex-col">
+                    <div className="flex justify-between text-sm font-serif font-semibold">
+                      <h4>{item.school}</h4>
+                      <span>{item.startDate} - {item.endDate}</span>
+                    </div>
+                    <div className="flex justify-between text-sm font-serif italic">
+                      <h4>{item.degree}</h4>
+                      <span>{item.location}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between text-sm font-serif italic font-extralight opacity-90">
-                    <h4>{item.degree}</h4>
-                    <span>{item.location}</span>
-                  </div>
-                </div>
-              ))
-            }
+                ))
+              }
+            </div>
           </section>
           <section className="flex flex-col gap-1">
             <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">EXPERIENCE</h3>
             <hr className="border-black" />
-            {
-              experience.map(item => (
-                <div className="flex flex-col">
-                  <div className="flex justify-between text-sm font-serif font-semibold">
-                    <h4>{item.company}</h4>
-                    <span className="font-sans">{item.startDate} - {item.endDate}</span>
+            <div className="flex flex-col gap-1 pl-4">
+              {
+                experience.map(item => (
+                  <div className="flex flex-col">
+                    <div className="flex justify-between text-sm font-serif font-semibold">
+                      <h4>{item.company}</h4>
+                      <span>{item.startDate} - {item.endDate}</span>
+                    </div>
+                    <div className="flex justify-between text-sm font-serif italic">
+                      <h4>{item.jobTitle}</h4>
+                      <span>{item.location}</span>
+                    </div>
+                    <ul className="list-disc list-inside pl-4 text-sm font-serif">
+                      {
+                        item.description.split('\n').map(line => (
+                          <li>{line}</li>
+                        ))
+                      }
+                    </ul>
                   </div>
-                  <div className="flex justify-between text-sm font-serif italic font-extralight opacity-90">
-                    <h4>{item.jobTitle}</h4>
-                    <span>{item.location}</span>
-                  </div>
-                  <ul className="list-disc list-inside pl-4 text-sm font-serif font-light">
-                    {
-                      item.description.split('\n').map(line => (
-                        <li>{line}</li>
-                      ))
-                    }
-                  </ul>
-                </div>
-              ))
-            }
+                ))
+              }
+            </div>
           </section>
           <section className="flex flex-col gap-1">
             <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Projects</h3>
             <hr className="border-black" />
-            {
-              projects.map(item => (
-                <div className="flex flex-col">
-                  <div className="flex justify-between text-sm font-serif font-semibold">
-                    <div className="flex gap-1">
-                      <h4>{item.title}</h4>
-                      <Separator />
-                      <span className="italic font-extralight">{item.technologies}</span>
+            <div className="flex flex-col gap-1 pl-4">
+              {
+                projects.map(item => (
+                  <div className="flex flex-col">
+                    <div className="flex justify-between text-sm font-serif font-semibold">
+                      <div className="flex gap-1">
+                        <h4>{item.title}</h4>
+                        <Separator />
+                        <span className="italic ">{item.technologies}</span>
+                      </div>
+                      <span className="">{item.date}</span>
                     </div>
-                    <span className="font-sans">{item.date}</span>
+                    <ul className="list-disc list-inside pl-4 text-sm font-serif">
+                      {
+                        item.description.split('\n').map(line => (
+                          <li>{line}</li>
+                        ))
+                      }
+                    </ul>
                   </div>
-                  <ul className="list-disc list-inside pl-4 text-sm font-serif font-light">
-                    {
-                      item.description.split('\n').map(line => (
-                        <li>{line}</li>
-                      ))
-                    }
-                  </ul>
-                </div>
-              ))
-            }
+                ))
+              }
+            </div>
           </section>
           <section className="flex flex-col gap-1">
             <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Skills</h3>
             <hr className="border-black" />
-            <div className="pl-4 prose marker:text-black font-light text-sm font-serif" dangerouslySetInnerHTML={{__html: skills}}>
+            <div className="pl-4 prose marker:text-black text-black text-sm font-serif" dangerouslySetInnerHTML={{__html: skills}}>
             </div>
           </section>
         </main>
