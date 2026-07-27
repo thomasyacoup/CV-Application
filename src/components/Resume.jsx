@@ -60,7 +60,7 @@ function ResumePageScaler({ children }) {
 }
 
 export function Resume() {
-  const { personalInfo, education, experience, projects } = useResume()
+  const { personalInfo, education, experience, projects, skills } = useResume()
   
   return (
     <ResumePageScaler>
@@ -147,6 +147,12 @@ export function Resume() {
                 </div>
               ))
             }
+          </section>
+          <section className="flex flex-col gap-1">
+            <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Skills</h3>
+            <hr className="border-black" />
+            <div className="pl-4 prose marker:text-black font-light text-sm font-serif" dangerouslySetInnerHTML={{__html: skills}}>
+            </div>
           </section>
         </main>
       </div>
