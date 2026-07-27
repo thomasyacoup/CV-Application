@@ -1,53 +1,55 @@
 import { useState } from "react";
 import Option from "./Option";
+import { useResume } from "@/context/ResumeContext";
 
-function ExperienceInfo({ onSubmit, onToggle, isActive }) {
-  const [data, setData] = useState([
-    {
-      experience: "Frontend Developer Internship",
-      description: "Built responsive UI using React and CSS",
-    },
-  ]);
-
+function ExperienceInfo({ onToggle, isActive }) {
   const [state, setState] = useState("normal");
-  const [experience, setExperience] = useState("");
+
+  const { experience, dispatchExperience } = useResume()
+
+  const [jobTitle, setJobTitle] = useState("")
+  const [company, setCompany] = useState("")
+  const [startDate, setStartDate] = useState("")
+  const [endDate, setEndDate] = useState("")
   const [description, setDescription] = useState("");
 
-  function onSave() {
-    onSubmit(data);
-  }
 
+  function resetStates() {
+    setState("normal");
+    
+    setJobTitle("")
+    setCompany("")
+    setStartDate("")
+    setEndDate("")
+    setDescription("")
+  }
+  
   function handleOptionClick(index) {
-    setExperience(data[index].experience);
-    setDescription(data[index].description);
+    setJobTitle(experience[index].jobTitle)
+    setCompany(experience[index].company)
+    setStartDate(experience[index].startDate)
+    setEndDate(experience[index].endDate)
+    setDescription(experience[index].description)
+
     setState(index);
   }
 
   function handleOptionDelete(index) {
-    const updated = [...data];
-    updated[index].display = "none";
-    setData(updated);
-    setState("normal");
+    dispatchExperience({type: "REMOVE", payload: { index }})
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    const newExp = { experience, description };
-    const updated = [...data, newExp];
-    setData(updated);
-    setExperience("");
-    setDescription("");
-    setState("normal");
+    const newExperience = { jobTitle, company, startDate, endDate, description };
+    dispatchExperience({type: "ADD", payload: newExperience})
+    resetStates()
   }
 
   function handleEditSubmit(e) {
     e.preventDefault();
-    const updated = [...data];
-    updated[state] = { experience, description };
-    setData(updated);
-    setExperience("");
-    setDescription("");
-    setState("normal");
+    const newExperience = { index: state, jobTitle, company, startDate, endDate, description };
+    dispatchExperience({type: "UPDATE", payload: newExperience})
+    resetStates()
   }
 
   return (
@@ -62,7 +64,7 @@ function ExperienceInfo({ onSubmit, onToggle, isActive }) {
         {state === "normal" ? (
           <>
             <div className="options">
-              {data.map((item, index) => (
+              {experience.map((item, index) => (
                 <Option
                   display={item.display || "block"}
                   key={index}
@@ -76,21 +78,45 @@ function ExperienceInfo({ onSubmit, onToggle, isActive }) {
               <button onClick={() => setState("new")} className="save-btn">
                 New
               </button>
-              <button className="save-btn" onClick={onSave}>
-                Save
-              </button>
             </div>
           </>
         ) : state === "new" ? (
           <form onSubmit={handleFormSubmit}>
             <div className="form-flex">
               <label>
-                Experience
+                Job Title
                 <input
                   required
                   type="text"
-                  value={experience}
-                  onChange={(e) => setExperience(e.target.value)}
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
+                />
+              </label>
+              <label>
+                Company
+                <input
+                  required
+                  type="text"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+              </label>
+              <label>
+                Start Date
+                <input
+                  required
+                  type="text"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </label>
+              <label>
+                End Date
+                <input
+                  required
+                  type="text"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
                 />
               </label>
               <label>
@@ -105,11 +131,7 @@ function ExperienceInfo({ onSubmit, onToggle, isActive }) {
             <div className="btns-flex">
               <button
                 type="button"
-                onClick={() => {
-                  setState("normal");
-                  setExperience("");
-                  setDescription("");
-                }}
+                onClick={() => {resetStates()}}
                 className="save-btn"
               >
                 Cancel
@@ -121,12 +143,39 @@ function ExperienceInfo({ onSubmit, onToggle, isActive }) {
           <form onSubmit={handleEditSubmit}>
             <div className="form-flex">
               <label>
-                Experience
+                Job Title
                 <input
                   required
                   type="text"
-                  value={experience}
-                  onChange={(e) => setExperience(e.target.value)}
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
+                />
+              </label>
+              <label>
+                Company
+                <input
+                  required
+                  type="text"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+              </label>
+              <label>
+                Start Date
+                <input
+                  required
+                  type="text"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </label>
+              <label>
+                End Date
+                <input
+                  required
+                  type="text"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
                 />
               </label>
               <label>
@@ -142,11 +191,7 @@ function ExperienceInfo({ onSubmit, onToggle, isActive }) {
               <button
                 className="save-btn"
                 type="button"
-                onClick={() => {
-                  setState("normal");
-                  setExperience("");
-                  setDescription("");
-                }}
+                onClick={() => {resetStates()}}
               >
                 Cancel
               </button>
