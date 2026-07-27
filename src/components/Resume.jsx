@@ -18,6 +18,8 @@ function ResumePageScaler({ children }) {
     if (!container || !page) return;
 
     const updateScale = () => {
+      if (window.matchMedia('print').matches) return;
+
       const containerWidth = container.offsetWidth;
       const pageWidth = page.offsetWidth;
       if (containerWidth === 0 || pageWidth === 0) return;
@@ -37,14 +39,15 @@ function ResumePageScaler({ children }) {
   return (
     <div
       ref={containerRef}
-      className="flex-1 min-w-0"
+      className="flex-1 min-w-0 print:h-auto! print:overflow-visible! print:w-auto!"
       style={{
         height: pageHeight || "auto",
-        overflow: "hidden", 
+        overflow: "hidden",
       }}
     >
       <div
         ref={pageRef}
+        className="print:transform-none! print:opacity-100!"
         style={{
           transform: `scale(${scale})`,
           transformOrigin: "top left",
@@ -64,7 +67,7 @@ export function Resume() {
   
   return (
     <ResumePageScaler>
-      <div className="rounded-md border-2 w-[210mm] mx-auto bg-white">
+      <div id="resume-preview" className="w-[210mm] min-h-[297mm]  bg-white">
         <main className="px-[18mm] py-[20mm] flex flex-col gap-6">
           <header>
             <h2 className="text-center font-bold font-serif text-3xl">
