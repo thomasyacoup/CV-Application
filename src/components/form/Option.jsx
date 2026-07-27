@@ -2,7 +2,7 @@ function Option({ data, handleClick, handleDelete, display }) {
   return (
     <div className={`option ${display}`}>
       <button className="option-main" onClick={handleClick}>
-        {data.school || data.category || data.project || data.jobTitle}
+        {data.school || data.category || data.title || data.jobTitle}
       </button>
       <button className="option-delete" onClick={handleDelete}>
         Delete
