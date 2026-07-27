@@ -17,8 +17,8 @@ const [personalInfo, setPersonalInfo] = useState({
       school: "Cairo University",
       location: "Cairo, Egypt",
       degree: "Bachelor of Computer Science",
-      startDate: "9-2016",
-      endDate: "6-2020",
+      startDate: "May 2016",
+      endDate: "Aug 2020",
     },
   ])
 
