@@ -83,7 +83,6 @@ export function Resume() {
           <section className="flex flex-col gap-1">
             <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Education</h3>
             <hr className="border-black" />
-            {console.log(education)}
             {
               education.map(item => (
                 <div className="flex flex-col">
@@ -102,7 +101,6 @@ export function Resume() {
           <section className="flex flex-col gap-1">
             <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">EXPERIENCE</h3>
             <hr className="border-black" />
-            {console.log(education)}
             {
               experience.map(item => (
                 <div className="flex flex-col">
@@ -128,7 +126,6 @@ export function Resume() {
           <section className="flex flex-col gap-1">
             <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Projects</h3>
             <hr className="border-black" />
-            {console.log(education)}
             {
               projects.map(item => (
                 <div className="flex flex-col">
