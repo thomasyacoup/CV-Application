@@ -60,7 +60,7 @@ function ResumePageScaler({ children }) {
 }
 
 export function Resume() {
-  const { personalInfo, education, experience } = useResume()
+  const { personalInfo, education, experience, projects } = useResume()
   
   return (
     <ResumePageScaler>
@@ -113,6 +113,32 @@ export function Resume() {
                   <div className="flex justify-between text-sm font-serif italic font-extralight opacity-90">
                     <h4>{item.jobTitle}</h4>
                     <span>{item.location}</span>
+                  </div>
+                  <ul className="list-disc list-inside pl-4 text-sm font-serif font-light">
+                    {
+                      item.description.split('\n').map(line => (
+                        <li>{line}</li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              ))
+            }
+          </section>
+          <section className="flex flex-col gap-1">
+            <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Projects</h3>
+            <hr className="border-black" />
+            {console.log(education)}
+            {
+              projects.map(item => (
+                <div className="flex flex-col">
+                  <div className="flex justify-between text-sm font-serif font-semibold">
+                    <div className="flex gap-1">
+                      <h4>{item.title}</h4>
+                      <Separator />
+                      <span className="italic font-extralight">{item.technologies}</span>
+                    </div>
+                    <span className="font-sans">{item.date}</span>
                   </div>
                   <ul className="list-disc list-inside pl-4 text-sm font-serif font-light">
                     {
