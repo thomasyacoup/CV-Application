@@ -1,52 +1,55 @@
 import { useState } from "react";
 import Option from "./Option";
+import { useResume } from "@/context/ResumeContext";
 
-function ProjectsInfo({ onSubmit, onToggle, isActive }) {
-  const [data, setData] = useState([
-    {
-      project: "My Portfolio",
-      description: "HTML, CSS, responsive design, and animations",
-    },
-  ]);
-
+function ProjectsInfo({ onToggle, isActive }) {
+  const { projects, dispatchProjects} = useResume()
+  
   const [state, setState] = useState("normal");
-  const [project, setProject] = useState("");
+
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("")
+  const [url, setUrl] = useState("")
   const [description, setDescription] = useState("");
 
-  function onSave() {
-    onSubmit(data);
+  function resetStates() {
+    setState("normal")
+    
+    setTitle("")
+    setDate("")
+    setUrl("")
+    setDescription("")
   }
 
   function handleOptionClick(index) {
-    setProject(data[index].project);
-    setDescription(data[index].description);
+    setTitle(projects[index].title)
+    setDate(projects[index].date)
+    setUrl(projects[index].url)
+    setDescription(projects[index].description)
+
     setState(index);
   }
 
   function handleOptionDelete(index) {
-    const updated = [...data];
-    updated[index].display = "none";
-    setData(updated);
-    setState("normal");
+    dispatchProjects({type: "REMOVE", payload: { index }})
+    resetStates()
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    const newProject = { project, description };
-    setData([...data, newProject]);
-    setProject("");
-    setDescription("");
-    setState("normal");
+
+    const newProject = { title, date, url, description };
+    dispatchProjects({type: "ADD", payload: newProject})
+    
+    resetStates()
   }
 
   function handleEditSubmit(e) {
     e.preventDefault();
-    const updated = [...data];
-    updated[state] = { project, description };
-    setData(updated);
-    setProject("");
-    setDescription("");
-    setState("normal");
+
+    dispatchProjects({type: "UPDATE", payload: { index: state ,title, date, url, description }})
+    
+    resetStates()
   }
 
   return (
@@ -63,7 +66,7 @@ function ProjectsInfo({ onSubmit, onToggle, isActive }) {
         {state === "normal" ? (
           <>
             <div className="options">
-              {data.map((item, index) => (
+              {projects.map((item, index) => (
                 <Option
                   display={item.display || "block"}
                   key={index}
@@ -77,21 +80,36 @@ function ProjectsInfo({ onSubmit, onToggle, isActive }) {
               <button onClick={() => setState("new")} className="save-btn">
                 New
               </button>
-              <button className="save-btn" onClick={onSave}>
-                Save
-              </button>
             </div>
           </>
         ) : state === "new" ? (
           <form onSubmit={handleFormSubmit}>
             <div className="form-flex">
               <label>
-                Project
+                Title
                 <input
                   required
                   type="text"
-                  value={project}
-                  onChange={(e) => setProject(e.target.value)}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </label>
+              <label>
+                Date
+                <input
+                  required
+                  type="text"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </label>
+              <label>
+                Url
+                <input
+                  required
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
                 />
               </label>
               <label>
@@ -106,11 +124,7 @@ function ProjectsInfo({ onSubmit, onToggle, isActive }) {
             <div className="btns-flex">
               <button
                 type="button"
-                onClick={() => {
-                  setState("normal");
-                  setProject("");
-                  setDescription("");
-                }}
+                onClick={() => {resetStates()}}
                 className="save-btn"
               >
                 Cancel
@@ -122,12 +136,30 @@ function ProjectsInfo({ onSubmit, onToggle, isActive }) {
           <form onSubmit={handleEditSubmit}>
             <div className="form-flex">
               <label>
-                Project
+                Title
                 <input
                   required
                   type="text"
-                  value={project}
-                  onChange={(e) => setProject(e.target.value)}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </label>
+              <label>
+                Date
+                <input
+                  required
+                  type="text"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </label>
+              <label>
+                Url
+                <input
+                  required
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
                 />
               </label>
               <label>
@@ -143,11 +175,7 @@ function ProjectsInfo({ onSubmit, onToggle, isActive }) {
               <button
                 className="save-btn"
                 type="button"
-                onClick={() => {
-                  setState("normal");
-                  setProject("");
-                  setDescription("");
-                }}
+                onClick={() => {resetStates()}}
               >
                 Cancel
               </button>
