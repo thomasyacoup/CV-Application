@@ -22,11 +22,25 @@ export function ResumeProvider({ children }) {
     },
   ])
 
+  const [experience, dispatchExperience] = useReducer(publicReducer, [{
+    jobTitle: "Solo Practitioner",
+    company: "Attorny",
+    startDate: "1999",
+    endDate: "2003",
+    description: `
+    - Found Creative sloution to solve clients' problems
+    - Establish lasting relationship with clients
+    - Spearheaded effort resulting in large-scale class action lawsuit
+    `
+  }])
+
   const value = { 
     personalInfo,
     setPersonalInfo,
     education,
     dispatchEducation,
+    experience, 
+    dispatchExperience
   }
   
   return (
