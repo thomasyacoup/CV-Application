@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
-import { DescriptionEditor } from "../ui/TextEditor";
+import { DescriptionEditor } from "../ui/DescriptionEditor";
 
 function SkillsInfo({ onToggle, isActive }) {
   const { skills, setSkills } = useResume()
