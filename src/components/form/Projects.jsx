@@ -10,6 +10,7 @@ function ProjectsInfo({ onToggle, isActive }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("")
   const [url, setUrl] = useState("")
+  const [technologies, setTechnologies] = useState("")
   const [description, setDescription] = useState("");
 
   function resetStates() {
@@ -18,6 +19,7 @@ function ProjectsInfo({ onToggle, isActive }) {
     setTitle("")
     setDate("")
     setUrl("")
+    setTechnologies("")
     setDescription("")
   }
 
@@ -25,6 +27,7 @@ function ProjectsInfo({ onToggle, isActive }) {
     setTitle(projects[index].title)
     setDate(projects[index].date)
     setUrl(projects[index].url)
+    setTechnologies(projects[index].technologies)
     setDescription(projects[index].description)
 
     setState(index);
@@ -38,7 +41,7 @@ function ProjectsInfo({ onToggle, isActive }) {
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    const newProject = { title, date, url, description };
+    const newProject = { title, date, url, technologies, description };
     dispatchProjects({type: "ADD", payload: newProject})
     
     resetStates()
@@ -47,7 +50,7 @@ function ProjectsInfo({ onToggle, isActive }) {
   function handleEditSubmit(e) {
     e.preventDefault();
 
-    dispatchProjects({type: "UPDATE", payload: { index: state ,title, date, url, description }})
+    dispatchProjects({type: "UPDATE", payload: { index: state ,title, date, url, technologies, description }})
     
     resetStates()
   }
@@ -113,6 +116,15 @@ function ProjectsInfo({ onToggle, isActive }) {
                 />
               </label>
               <label>
+                Technologies
+                <input
+                  required
+                  type="text"
+                  value={technologies}
+                  onChange={(e) => setTechnologies(e.target.value)}
+                />
+              </label>
+              <label>
                 Description
                 <textarea
                   required
@@ -160,6 +172,15 @@ function ProjectsInfo({ onToggle, isActive }) {
                   type="url"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
+                />
+              </label>
+              <label>
+                Technologies
+                <input
+                  required
+                  type="text"
+                  value={technologies}
+                  onChange={(e) => setTechnologies(e.target.value)}
                 />
               </label>
               <label>
