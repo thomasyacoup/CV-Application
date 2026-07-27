@@ -79,6 +79,8 @@ export function ResumeProvider({ children }) {
     }
   ])
 
+  const [skills, setSkills] = useState("JavaScript, TypeScript, React, Node.js, HTML5, CSS3, Tailwind CSS, Git, MongoDB, REST APIs")
+
   const value = { 
     personalInfo,
     setPersonalInfo,
@@ -88,6 +90,8 @@ export function ResumeProvider({ children }) {
     dispatchExperience,
     projects,
     dispatchProjects,
+    skills,
+    setSkills
   }
   
   return (
