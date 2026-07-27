@@ -7,6 +7,36 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  .form {
+    display: none !important;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+  }
+
+  #resume-preview {
+    width: 210mm !important;
+    height: auto !important;
+    min-height: 297mm !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: 'Inter Variable', sans-serif;
