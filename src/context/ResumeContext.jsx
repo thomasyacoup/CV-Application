@@ -9,7 +9,7 @@ const [personalInfo, setPersonalInfo] = useState({
     email: "sarah.ahmed.dev@gmail.com",
     phone: "010-1234-5678",
     github: "https://github.com/sarahahmed",
-    linkedin: "https://www.linkedin.com/in/sarah-ahmed-dev/",
+    linkedin: "https://linkedin.com/in/sarah-ahmed-dev",
   })
 
   const [education, dispatchEducation] = useReducer(publicReducer, [
