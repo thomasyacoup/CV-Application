@@ -11,6 +11,7 @@ function ExperienceInfo({ onToggle, isActive }) {
   const [company, setCompany] = useState("")
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
+  const [location, setLocation] = useState("")
   const [description, setDescription] = useState("");
 
 
@@ -21,6 +22,7 @@ function ExperienceInfo({ onToggle, isActive }) {
     setCompany("")
     setStartDate("")
     setEndDate("")
+    setLocation("")
     setDescription("")
   }
   
@@ -29,6 +31,7 @@ function ExperienceInfo({ onToggle, isActive }) {
     setCompany(experience[index].company)
     setStartDate(experience[index].startDate)
     setEndDate(experience[index].endDate)
+    setLocation(experience[index].location)
     setDescription(experience[index].description)
 
     setState(index);
@@ -40,14 +43,14 @@ function ExperienceInfo({ onToggle, isActive }) {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    const newExperience = { jobTitle, company, startDate, endDate, description };
+    const newExperience = { jobTitle, company, startDate, endDate, location, description };
     dispatchExperience({type: "ADD", payload: newExperience})
     resetStates()
   }
 
   function handleEditSubmit(e) {
     e.preventDefault();
-    const newExperience = { index: state, jobTitle, company, startDate, endDate, description };
+    const newExperience = { index: state, jobTitle, company, startDate, endDate, location, description };
     dispatchExperience({type: "UPDATE", payload: newExperience})
     resetStates()
   }
@@ -120,6 +123,15 @@ function ExperienceInfo({ onToggle, isActive }) {
                 />
               </label>
               <label>
+                Location
+                <input
+                  required
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+              </label>
+              <label>
                 Description
                 <textarea
                   required
@@ -176,6 +188,15 @@ function ExperienceInfo({ onToggle, isActive }) {
                   type="text"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
+                />
+              </label>
+              <label>
+                Location
+                <input
+                  required
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </label>
               <label>
