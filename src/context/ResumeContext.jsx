@@ -4,83 +4,82 @@ import { createContext, useContext, useReducer, useState } from "react";
 const ResumeContext = createContext(null);
 
 export function ResumeProvider({ children }) {
-  const [personalInfo, setPersonalInfo] = useState({
-    name: "James McGill",
-    email: "saulgoodman@better-call-saul.com", 
-    phone: "505-842-5662",
-    github: "https://github.com/jamesmcgill", 
-    linkedin: "https://www.linkedin.com/in/saul-goodman-254762276/",
+const [personalInfo, setPersonalInfo] = useState({
+    name: "Sarah Ahmed",
+    email: "sarah.ahmed.dev@gmail.com",
+    phone: "010-1234-5678",
+    github: "https://github.com/sarahahmed",
+    linkedin: "https://www.linkedin.com/in/sarah-ahmed-dev/",
   })
 
-  const [education, dispatchEducation] = useReducer(publicReducer , [
+  const [education, dispatchEducation] = useReducer(publicReducer, [
     {
-      school: "Albuquerque community college",
-      location: "Albuquerque",
-      degree: "Bachelor of law",
-      startDate: "18-6-1978",
-      endDate: "18-6-1980",
+      school: "Cairo University",
+      location: "Cairo, Egypt",
+      degree: "Bachelor of Computer Science",
+      startDate: "9-2016",
+      endDate: "6-2020",
     },
   ])
 
   const [experience, dispatchExperience] = useReducer(publicReducer, [{
-    jobTitle: "Solo Practitioner",
-    company: "Attorney",
-    location: "Albuquerque",
-    startDate: "1999",
-    endDate: "2003",
+    jobTitle: "Senior Frontend Developer",
+    company: "Vezeeta",
+    location: "Cairo, Egypt",
+    startDate: "2022",
+    endDate: "Present",
     description:
-    `Found creative solutions to solve clients' problems
-    Spearheaded effort resulting in large-scale class action lawsuit
-    Established lasting relationships with clients`
+    `Led migration of legacy codebase to React and TypeScript
+    Improved page load performance by 40% through code splitting and lazy loading
+    Mentored a team of 3 junior developers and conducted code reviews`
   },
   {
-    jobTitle: "Davis & Main",
-    company: "Attorney",
-    location: "Albuquerque",
-    startDate: "2002",
-    endDate: "2002",
+    jobTitle: "Frontend Developer",
+    company: "Swvl",
+    location: "Cairo, Egypt",
+    startDate: "2020",
+    endDate: "2022",
     description:
-    `Proficient in use of media for client outreach
-    Oversaw marketing strategies and delivered presentations to management
-    Participated in conflict resolution and employee training`
+    `Built and maintained customer-facing booking dashboard using Vue.js
+    Collaborated with backend team to design REST API contracts
+    Implemented automated testing that reduced production bugs by 25%`
   },
   {
-    jobTitle: "Hamlin, Hamlin & McGill",
-    company: "Mailroom Clerk",
-    location: "Albuquerque",
-    startDate: "1992",
-    endDate: "1999",
+    jobTitle: "Software Engineering Intern",
+    company: "Instabug",
+    location: "Cairo, Egypt",
+    startDate: "2019",
+    endDate: "2020",
     description:
-    `Organized and maintained intra-office memo system
-    Reliably sorted and delivered post for entire firm
-    Maintained equipment in HHM copy room`
+    `Assisted in developing internal tooling for bug tracking system
+    Wrote unit tests to improve code coverage
+    Participated in daily standups and sprint planning`
   }])
 
   const [projects, dispatchProjects] = useReducer(publicReducer, [
     {
-      title: "Breaking Bad",
+      title: "TaskFlow",
       technologies: "React, Node.js, Express, MongoDB",
-      date: "2013",
+      date: "2023",
       description:
-      `Developed a full-stack platform to track character arcs and story progression
-      Implemented a dynamic dashboard for visualizing plot timelines
+      `Developed a full-stack task management platform for small teams
+      Implemented a dynamic dashboard for visualizing project timelines
       Collaborated with a small team to deliver features under tight deadlines`,
-      url: "https://www.imdb.com/title/tt0903747/"
+      url: "https://github.com/sarahahmed/taskflow"
     },
     {
-      title: "Better Call Saul",
+      title: "ExpenseTracker",
       technologies: "Vue.js, Firebase, Tailwind CSS, REST API",
       date: "2022",
       description:
-      `Built a case management system for tracking client interactions
+      `Built a personal finance tracking app with budget alerts
       Integrated real-time data sync using Firebase for seamless updates
       Designed a responsive UI focused on clarity and ease of use`,
-      url: "https://www.imdb.com/title/tt3032476/"
+      url: "https://github.com/sarahahmed/expense-tracker"
     }
   ])
 
   const [skills, setSkills] = useState("JavaScript, TypeScript, React, Node.js, HTML5, CSS3, Tailwind CSS, Git, MongoDB, REST APIs")
-
   const value = { 
     personalInfo,
     setPersonalInfo,
