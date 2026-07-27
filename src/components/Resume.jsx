@@ -78,9 +78,9 @@ export function Resume() {
               <Separator />
               <a href={personalInfo.email} className="underline">{personalInfo.email}</a>
               <Separator />
-              <a href={personalInfo.github} className="underline">GitHub</a>
+              <a href={personalInfo.github} className="underline">{personalInfo.github.replace("https://", "")}</a>
               <Separator />
-              <a href={personalInfo.linkedin} className="underline">LinkedIn</a>
+              <a href={personalInfo.linkedin} className="underline">{personalInfo.linkedin.replace("https://", "")}</a>
             </div>
           </header>
           <section className="flex flex-col gap-1">
