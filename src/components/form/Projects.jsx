@@ -1,6 +1,75 @@
 import { useState } from "react";
 import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
+import { CollapseButtton } from "../ui/CollapseButton";
+import { CollapseContainer } from "../ui/CollapseContainer";
+import { Button } from "../ui/button";
+import { Field, FieldGroup, FieldLabel } from "../ui/field";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+
+function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, setUrl, technologies, setTechnologies, description, setDescription}) {
+  return (
+    <form onSubmit={onSubmit}>
+      <FieldGroup className="grid grid-cols-2 gap-4 p-4">
+        <Field>
+          <FieldLabel>Title</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Date</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Project Url</FieldLabel>
+          <Input
+            required
+            type="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Technologies</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={technologies}
+            onChange={(e) => setTechnologies(e.target.value)}
+          />
+        </Field>
+        <Field className={"col-span-2"}>
+          <FieldLabel>Description</FieldLabel>
+          <Textarea
+            required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></Textarea>
+        </Field>
+      </FieldGroup>
+      <div className="flex gap-4 p-4 justify-end">
+        <Button
+          variant="muted"
+          type="button"
+          onClick={onReset}
+        >
+          Cancel
+        </Button>
+        <Button type="submit">Save</Button>
+      </div>
+    </form>
+  )
+}
 
 function ProjectsInfo({ onToggle, isActive }) {
   const { projects, dispatchProjects} = useResume()
@@ -57,18 +126,13 @@ function ProjectsInfo({ onToggle, isActive }) {
 
   return (
     <div className={isActive ? "active category" : "category"}>
-      <button
-        className="toggler"
-        onClick={() => {
-          onToggle(isActive ? "none" : "project");
-        }}
-      >
+      <CollapseButtton isActive={isActive} onToggle={onToggle} sectionName={"project"}>
         Projects
-      </button>
-      <div className="toggler-target">
+      </CollapseButtton>
+      <CollapseContainer isActive={isActive}>
         {state === "normal" ? (
-          <>
-            <div className="options">
+          <div className="flex flex-col">
+            <div>
               {projects.map((item, index) => (
                 <Option
                   display={item.display || "block"}
@@ -79,132 +143,44 @@ function ProjectsInfo({ onToggle, isActive }) {
                 />
               ))}
             </div>
-            <div className="btns-flex">
-              <button onClick={() => setState("new")} className="save-btn">
+            <div className="p-4">
+              <Button onClick={() => setState("new")} className="float-right">
                 New
-              </button>
+              </Button>
             </div>
-          </>
+          </div>
         ) : state === "new" ? (
-          <form onSubmit={handleFormSubmit}>
-            <div className="form-flex">
-              <label>
-                Title
-                <input
-                  required
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </label>
-              <label>
-                Date
-                <input
-                  required
-                  type="text"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </label>
-              <label>
-                Url
-                <input
-                  required
-                  type="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </label>
-              <label>
-                Technologies
-                <input
-                  required
-                  type="text"
-                  value={technologies}
-                  onChange={(e) => setTechnologies(e.target.value)}
-                />
-              </label>
-              <label>
-                Description
-                <textarea
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </label>
-            </div>
-            <div className="btns-flex">
-              <button
-                type="button"
-                onClick={() => {resetStates()}}
-                className="save-btn"
-              >
-                Cancel
-              </button>
-              <input type="submit" value="Add" className="save-btn" />
-            </div>
-          </form>
+          <ProjectsForm 
+            onSubmit={handleFormSubmit}
+            onReset={resetStates}
+            title={title}
+            setTitle={setTitle}
+            technologies={technologies}
+            setTechnologies={setTechnologies}
+            date={date}
+            setDate={setDate}
+            description={description}
+            setDescription={setDescription}
+            url={url}
+            setUrl={setUrl}
+          />
         ) : (
-          <form onSubmit={handleEditSubmit}>
-            <div className="form-flex">
-              <label>
-                Title
-                <input
-                  required
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </label>
-              <label>
-                Date
-                <input
-                  required
-                  type="text"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </label>
-              <label>
-                Url
-                <input
-                  required
-                  type="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </label>
-              <label>
-                Technologies
-                <input
-                  required
-                  type="text"
-                  value={technologies}
-                  onChange={(e) => setTechnologies(e.target.value)}
-                />
-              </label>
-              <label>
-                Description
-                <textarea
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </label>
-            </div>
-            <div className="btns-flex">
-              <button
-                className="save-btn"
-                type="button"
-                onClick={() => {resetStates()}}
-              >
-                Cancel
-              </button>
-              <input type="submit" value="Save" className="save-btn" />
-            </div>
-          </form>
+          <ProjectsForm 
+            onSubmit={handleEditSubmit}
+            onReset={resetStates}
+            title={title}
+            setTitle={setTitle}
+            technologies={technologies}
+            setTechnologies={setTechnologies}
+            date={date}
+            setDate={setDate}
+            description={description}
+            setDescription={setDescription}
+            url={url}
+            setUrl={setUrl}
+          />
         )}
-      </div>
+      </CollapseContainer>
     </div>
   );
 }
