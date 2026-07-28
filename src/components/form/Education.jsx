@@ -1,6 +1,77 @@
 import { useState } from "react";
 import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
+import { CollapseButtton } from "../ui/CollapseButton";
+import { CollapseContainer } from "../ui/CollapseContainer";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Field, FieldGroup, FieldLabel } from "../ui/field";
+
+function EducationForm({handleSubmit, onReset, school, setSchool, location, setLocation, degree, setDegree, startDate, setStartDate, endDate, setEndDate}) {
+  return (
+    <form onSubmit={handleSubmit}>
+      <FieldGroup className="grid grid-cols-2 gap-4 p-4">
+        <Field>
+          <FieldLabel>School</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={school}
+            onChange={(e) => setSchool(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Location</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Degree</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={degree}
+            onChange={(e) => setDegree(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Start & Graduation Date</FieldLabel>
+          <div className="flex gap-2">
+            <Input
+              required
+              type="text"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <Input
+              required
+              type="text"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
+        </Field>
+      </FieldGroup>
+      <div className="flex justify-end gap-4 p-4">
+        <Button
+          type="button"
+          onClick={onReset}
+          variant="muted"
+        >
+          Cansle
+        </Button>
+        <Button type="submit">
+          Add
+        </Button>
+      </div>
+    </form>
+  )
+}
+
 
 function EducationInfo({ isActive, onToggle }) {
   const { education, dispatchEducation } = useResume();
@@ -10,7 +81,7 @@ function EducationInfo({ isActive, onToggle }) {
   const [degree, setDegree] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
+  
   const [state, setState] = useState("normal");
 
   function resetStates() {
@@ -50,22 +121,16 @@ function EducationInfo({ isActive, onToggle }) {
   }
 
   return (
-    <div className={isActive ? "active category" : "category"}>
-      <button
-        className="toggler"
-        onClick={() => {
-          isActive ? onToggle("none") : onToggle("education");
-        }}
-      >
+    <div>
+      <CollapseButtton isActive={isActive} onToggle={onToggle} sectionName={"education"}>
         Education
-      </button>
-      <div className="toggler-target">
+      </CollapseButtton>
+      <CollapseContainer isActive={isActive}>
         {state === "normal" ? (
-          <>
-            <div className="options">
+          <div className="flex flex-col">
+            <div className="flex flex-col justify-start">
               {education.map((item, index) => (
                 <Option
-                  display={item.display || "block"}
                   key={index}
                   handleClick={() => handleOptionClick(index)}
                   handleDelete={() => handleOptionDelete(index)}
@@ -73,135 +138,44 @@ function EducationInfo({ isActive, onToggle }) {
                 />
               ))}
             </div>
-
-            <div className="btns-flex">
-              <button onClick={() => setState("new")} className="save-btn">
+            <div className="p-4">
+              <Button onClick={() => setState("new")} className={" float-end"}>
                 New
-              </button>
+              </Button>
             </div>
-          </>
+          </div>
         ) : state === "new" ? (
-          <form onSubmit={handleEducationCreate}>
-            <div className="form-flex">
-              <label htmlFor="">
-                School
-                <input
-                  required
-                  type="text"
-                  value={school}
-                  onChange={(e) => setSchool(e.target.value)}
-                />
-              </label>
-              <label htmlFor="">
-                Location
-                <input
-                  required
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </label>
-              <label htmlFor="">
-                Degree
-                <input
-                  required
-                  type="text"
-                  value={degree}
-                  onChange={(e) => setDegree(e.target.value)}
-                />
-              </label>
-              <label>
-                Start Date
-                <input
-                  required
-                  type="text"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </label>
-              <label>
-                Graduation Date
-                <input
-                  required
-                  type="text"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </label>
-            </div>
-            <div className="btns-flex">
-              <button
-                type="button"
-                onClick={() => resetStates()}
-                className="save-btn"
-              >
-                Cansle
-              </button>
-              <input type="submit" value="add" className="save-btn" />
-            </div>
-          </form>
+          <EducationForm 
+            onSubmit={handleEducationCreate}
+            onReset={resetStates}
+            school={school}
+            setSchool={setSchool}
+            location={location}
+            setLocation={setLocation}
+            degree={degree}
+            setDegree={setDegree}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+          />
         ) : (
-          <form onSubmit={handleEditSubmit}>
-            <div className="form-flex">
-              <label htmlFor="">
-                School
-                <input
-                  required
-                  type="text"
-                  value={school}
-                  onChange={(e) => setSchool(e.target.value)}
-                />
-              </label>
-              <label htmlFor="">
-                Location
-                <input
-                  required
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </label>
-              <label htmlFor="">
-                Degree
-                <input
-                  required
-                  type="text"
-                  value={degree}
-                  onChange={(e) => setDegree(e.target.value)}
-                />
-              </label>
-              <label>
-                Start Date
-                <input
-                  required
-                  type="text"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </label>
-              <label>
-                Graduation Date
-                <input
-                  required
-                  type="text"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </label>
-            </div>
-            <div className="btns-flex">
-              <button
-                className="save-btn"
-                type="button"
-                onClick={() => {resetStates()}}
-              >
-                Cancel
-              </button>
-              <input type="submit" value="Save" className="save-btn" />
-            </div>
-          </form>
+          <EducationForm 
+            onSubmit={handleEditSubmit}
+            onReset={resetStates}
+            school={school}
+            setSchool={setSchool}
+            location={location}
+            setLocation={setLocation}
+            degree={degree}
+            setDegree={setDegree}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+          />
         )}
-      </div>
+      </CollapseContainer>
     </div>
   );
 }
