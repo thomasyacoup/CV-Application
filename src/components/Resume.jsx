@@ -66,105 +66,107 @@ export function Resume() {
   const { personalInfo, education, experience, projects, skills } = useResume()
   
   return (
-    <ResumePageScaler>
-      <div id="resume-preview" className="w-[210mm] min-h-[297mm]  bg-white">
-        <main className="px-[18mm] py-[20mm] flex flex-col gap-6">
-          <header>
-            <h2 className="text-center font-bold font-serif text-3xl">
-              {personalInfo.name}
-            </h2>
-            <div className="flex gap-1 text-[10.5px] font-serif justify-center">
-              <span>{personalInfo.phone}</span>
-              <Separator />
-              <a href={personalInfo.email} className="underline">{personalInfo.email}</a>
-              <Separator />
-              <a href={personalInfo.github} className="underline">{personalInfo.github.replace("https://", "")}</a>
-              <Separator />
-              <a href={personalInfo.linkedin} className="underline">{personalInfo.linkedin.replace("https://", "")}</a>
-            </div>
-          </header>
-          <section className="flex flex-col gap-1">
-            <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Education</h3>
-            <hr className="border-black" />
-            <div className="flex flex-col gap-1 pl-4">
-              {
-                education.map(item => (
-                  <div className="flex flex-col">
-                    <div className="flex justify-between text-sm font-serif font-semibold">
-                      <h4>{item.school}</h4>
-                      <span>{item.startDate} - {item.endDate}</span>
-                    </div>
-                    <div className="flex justify-between text-sm font-serif italic">
-                      <h4>{item.degree}</h4>
-                      <span>{item.location}</span>
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-          </section>
-          <section className="flex flex-col gap-1">
-            <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">EXPERIENCE</h3>
-            <hr className="border-black" />
-            <div className="flex flex-col gap-1 pl-4">
-              {
-                experience.map(item => (
-                  <div className="flex flex-col">
-                    <div className="flex justify-between text-sm font-serif font-semibold">
-                      <h4>{item.company}</h4>
-                      <span>{item.startDate} - {item.endDate}</span>
-                    </div>
-                    <div className="flex justify-between text-sm font-serif italic">
-                      <h4>{item.jobTitle}</h4>
-                      <span>{item.location}</span>
-                    </div>
-                    <ul className="list-disc list-inside pl-4 text-sm font-serif">
-                      {
-                        item.description.split('\n').map(line => (
-                          <li>{line}</li>
-                        ))
-                      }
-                    </ul>
-                  </div>
-                ))
-              }
-            </div>
-          </section>
-          <section className="flex flex-col gap-1">
-            <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Projects</h3>
-            <hr className="border-black" />
-            <div className="flex flex-col gap-1 pl-4">
-              {
-                projects.map(item => (
-                  <div className="flex flex-col">
-                    <div className="flex justify-between text-sm font-serif font-semibold">
-                      <div className="flex gap-1">
-                        <h4>{item.title}</h4>
-                        <Separator />
-                        <span className="italic ">{item.technologies}</span>
+    <div className="rounded-md border border-border h-full overflow-y-scroll flex-1">
+      <ResumePageScaler>
+        <div id="resume-preview" className="w-[210mm] min-h-[297mm]  bg-white">
+          <main className="px-[18mm] py-[20mm] flex flex-col gap-6">
+            <header>
+              <h2 className="text-center font-bold font-serif text-3xl">
+                {personalInfo.name}
+              </h2>
+              <div className="flex gap-1 text-[10.5px] font-serif justify-center">
+                <span>{personalInfo.phone}</span>
+                <Separator />
+                <a href={personalInfo.email} className="underline">{personalInfo.email}</a>
+                <Separator />
+                <a href={personalInfo.github} className="underline">{personalInfo.github.replace("https://", "")}</a>
+                <Separator />
+                <a href={personalInfo.linkedin} className="underline">{personalInfo.linkedin.replace("https://", "")}</a>
+              </div>
+            </header>
+            <section className="flex flex-col gap-1">
+              <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Education</h3>
+              <hr className="border-black" />
+              <div className="flex flex-col gap-1 pl-4">
+                {
+                  education.map(item => (
+                    <div className="flex flex-col">
+                      <div className="flex justify-between text-sm font-serif font-semibold">
+                        <h4>{item.school}</h4>
+                        <span>{item.startDate} - {item.endDate}</span>
                       </div>
-                      <span className="">{item.date}</span>
+                      <div className="flex justify-between text-sm font-serif italic">
+                        <h4>{item.degree}</h4>
+                        <span>{item.location}</span>
+                      </div>
                     </div>
-                    <ul className="list-disc list-inside pl-4 text-sm font-serif">
-                      {
-                        item.description.split('\n').map(line => (
-                          <li>{line}</li>
-                        ))
-                      }
-                    </ul>
-                  </div>
-                ))
-              }
-            </div>
-          </section>
-          <section className="flex flex-col gap-1">
-            <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Skills</h3>
-            <hr className="border-black" />
-            <div className="pl-4 prose marker:text-black text-black text-sm font-serif" dangerouslySetInnerHTML={{__html: skills}}>
-            </div>
-          </section>
-        </main>
-      </div>
-    </ResumePageScaler>
+                  ))
+                }
+              </div>
+            </section>
+            <section className="flex flex-col gap-1">
+              <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">EXPERIENCE</h3>
+              <hr className="border-black" />
+              <div className="flex flex-col gap-1 pl-4">
+                {
+                  experience.map(item => (
+                    <div className="flex flex-col">
+                      <div className="flex justify-between text-sm font-serif font-semibold">
+                        <h4>{item.company}</h4>
+                        <span>{item.startDate} - {item.endDate}</span>
+                      </div>
+                      <div className="flex justify-between text-sm font-serif italic">
+                        <h4>{item.jobTitle}</h4>
+                        <span>{item.location}</span>
+                      </div>
+                      <ul className="list-disc list-inside pl-4 text-sm font-serif">
+                        {
+                          item.description.split('\n').map(line => (
+                            <li>{line}</li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+            <section className="flex flex-col gap-1">
+              <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Projects</h3>
+              <hr className="border-black" />
+              <div className="flex flex-col gap-1 pl-4">
+                {
+                  projects.map(item => (
+                    <div className="flex flex-col">
+                      <div className="flex justify-between text-sm font-serif font-semibold">
+                        <div className="flex gap-1">
+                          <h4>{item.title}</h4>
+                          <Separator />
+                          <span className="italic ">{item.technologies}</span>
+                        </div>
+                        <span className="">{item.date}</span>
+                      </div>
+                      <ul className="list-disc list-inside pl-4 text-sm font-serif">
+                        {
+                          item.description.split('\n').map(line => (
+                            <li>{line}</li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+            <section className="flex flex-col gap-1">
+              <h3 className="font-extrabold text-xm font-serif uppercase tracking-wider">Skills</h3>
+              <hr className="border-black" />
+              <div className="pl-4 prose marker:text-black text-black text-sm font-serif" dangerouslySetInnerHTML={{__html: skills}}>
+              </div>
+            </section>
+          </main>
+        </div>
+      </ResumePageScaler>
+    </div>
   )
 }
