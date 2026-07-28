@@ -1,6 +1,84 @@
 import { useState } from "react";
 import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
+import { CollapseButtton } from "../ui/CollapseButton";
+import { CollapseContainer } from "../ui/CollapseContainer";
+import { Button } from "../ui/button";
+import { Field, FieldGroup, FieldLabel } from "../ui/field";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+
+function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setCompany, startDate, setStartDate, endDate, setEndDate, location, setLocation,description, setDescription}) {
+  return (
+    <form onSubmit={onSubmit}>
+      <FieldGroup className="grid grid-cols-2 gap-4 p-4">
+        <Field>
+          <FieldLabel>Job Title</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Company</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+          />
+        </Field>
+        <Field>
+          <FieldLabel>Start & End Date</FieldLabel>
+          <div className="flex gap-2">
+            <Input
+              required
+              type="text"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <Input
+              required
+              type="text"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
+        </Field>
+        <Field>
+          <FieldLabel>Location</FieldLabel>
+          <Input
+            required
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </Field>
+        <Field className="col-span-2">
+          <FieldLabel>Description</FieldLabel>
+          <Textarea
+            required
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></Textarea>
+        </Field>
+      </FieldGroup>
+      <div className="btns-flex">
+        <Button
+          type="button"
+          onClick={onReset}
+          variant="muted"
+        >
+          Cancel
+        </Button>
+        <Button type="submit">Save</Button>
+      </div>
+    </form>
+  )
+}
+
 
 function ExperienceInfo({ onToggle, isActive }) {
   const [state, setState] = useState("normal");
@@ -56,17 +134,14 @@ function ExperienceInfo({ onToggle, isActive }) {
   }
 
   return (
-    <div className={isActive ? "active category" : "category"}>
-      <button
-        className="toggler"
-        onClick={() => onToggle(isActive ? "none" : "experience")}
-      >
-        Experience
-      </button>
-      <div className="toggler-target">
+    <div>
+      <CollapseButtton isActive={isActive} onToggle={onToggle} sectionName={"experience"}>
+        Experiences
+      </CollapseButtton>
+      <CollapseContainer isActive={isActive}>
         {state === "normal" ? (
-          <>
-            <div className="options">
+          <div className="flex flex-col">
+            <div>
               {experience.map((item, index) => (
                 <Option
                   display={item.display || "block"}
@@ -77,150 +152,48 @@ function ExperienceInfo({ onToggle, isActive }) {
                 />
               ))}
             </div>
-            <div className="btns-flex">
-              <button onClick={() => setState("new")} className="save-btn">
+            <div className="p-4">
+              <Button onClick={() => setState("new")} className="float-right">
                 New
-              </button>
+              </Button>
             </div>
-          </>
+          </div>
         ) : state === "new" ? (
-          <form onSubmit={handleFormSubmit}>
-            <div className="form-flex">
-              <label>
-                Job Title
-                <input
-                  required
-                  type="text"
-                  value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
-                />
-              </label>
-              <label>
-                Company
-                <input
-                  required
-                  type="text"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                />
-              </label>
-              <label>
-                Start Date
-                <input
-                  required
-                  type="text"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </label>
-              <label>
-                End Date
-                <input
-                  required
-                  type="text"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </label>
-              <label>
-                Location
-                <input
-                  required
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </label>
-              <label>
-                Description
-                <textarea
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </label>
-            </div>
-            <div className="btns-flex">
-              <button
-                type="button"
-                onClick={() => {resetStates()}}
-                className="save-btn"
-              >
-                Cancel
-              </button>
-              <input type="submit" value="Add" className="save-btn" />
-            </div>
-          </form>
+          <ExperienceForm 
+            onSubmit={handleFormSubmit}
+            onReset={resetStates}
+            jobTitle={jobTitle}
+            setJobTitle={setJobTitle}
+            company={company}
+            setCompany={setCompany}
+            location={location}
+            setLocation={setLocation}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            description={description}
+            setDescription={setDescription}
+          />
         ) : (
-          <form onSubmit={handleEditSubmit}>
-            <div className="form-flex">
-              <label>
-                Job Title
-                <input
-                  required
-                  type="text"
-                  value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
-                />
-              </label>
-              <label>
-                Company
-                <input
-                  required
-                  type="text"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                />
-              </label>
-              <label>
-                Start Date
-                <input
-                  required
-                  type="text"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </label>
-              <label>
-                End Date
-                <input
-                  required
-                  type="text"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </label>
-              <label>
-                Location
-                <input
-                  required
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </label>
-              <label>
-                Description
-                <textarea
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </label>
-            </div>
-            <div className="btns-flex">
-              <button
-                className="save-btn"
-                type="button"
-                onClick={() => {resetStates()}}
-              >
-                Cancel
-              </button>
-              <input type="submit" value="Save" className="save-btn" />
-            </div>
-          </form>
-        )}
-      </div>
+          <ExperienceForm 
+            onSubmit={handleEditSubmit}
+            onReset={resetStates}
+            jobTitle={jobTitle}
+            setJobTitle={setJobTitle}
+            company={company}
+            setCompany={setCompany}
+            location={location}
+            setLocation={setLocation}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            description={description}
+            setDescription={setDescription}
+          />
+        )}     
+      </CollapseContainer>
     </div>
   );
 }
