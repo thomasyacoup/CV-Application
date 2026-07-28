@@ -12,7 +12,7 @@ function Forms() {
 
 
   return (
-    <div className="form h-dvh flex-1 ">
+    <div className="form h-full flex-1 overflow-y-scroll border border-border rounded-md bg-white scrollbar-none">
       <PersonalInfo
         isActive={toggle === "personal"}
         onToggle={setToggle}
