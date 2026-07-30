@@ -1,0 +1,29 @@
+import { ArrowDownFromLine, File } from "lucide-react";
+import { Button } from "./ui/button";
+import { GitHubIcon } from "./ui/GithubIcon";
+
+export function Header() {
+  return (
+    <header className="h-12 col-span-2 bg-white rounded flex items-center justify-between p-2 print:hidden">
+      <div className="flex items-center">
+        <File className="text-primary size-8"/>
+        <h3 className="font-bold leading-none">
+          Free<br />
+          <span className="text-primary">Resume</span>
+        </h3>
+      </div>
+      <div className="flex gap-2 items-center">
+        <a href="https://github.com/thomasyacoup">
+          <GitHubIcon className="size-8 fill-gray-700 hover:fill-black transition delay-50" />  
+        </a>
+        <Button
+          className="rounded"
+          size="icon"
+          onClick={() => window.print()}
+        >
+          <ArrowDownFromLine />
+        </Button>
+      </div>
+    </header>
+  )
+}
