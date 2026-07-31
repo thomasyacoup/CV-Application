@@ -66,9 +66,9 @@ export function Resume() {
   const { personalInfo, education, experience, projects, skills } = useResume()
   
   return (
-    <div className="rounded-md border border-border h-full overflow-y-scroll flex-1">
+    <div className="rounded h-full overflow-y-scroll flex-1 scrollbar-none">
       <ResumePageScaler>
-        <div id="resume-preview" className="w-[210mm] min-h-[297mm]  bg-white">
+        <div className="w-[210mm] min-h-[297mm]  bg-white">
           <main className="px-[18mm] py-[20mm] flex flex-col gap-6">
             <header>
               <h2 className="text-center font-bold font-serif text-3xl">
