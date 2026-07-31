@@ -22,7 +22,7 @@ export function Home() {
           <h1 className="text-7xl font-extrabold text-center">Make Your Resume <br /> <span className="text-primary">For Free</span></h1>
           <p className="text-center opacity-50 font-bold">No subscriptions, no trials, no hidden fees — just free.</p>
         </div>
-        <Button size="lg">Create Now</Button>
+        <Button size="lg"> <Link to="/app">Create Now</Link> </Button>
         {/* <img src={cvImage} className="absolute w-3xs rotate-30 -left-40 top-10 shadow-[10px_50px_80px]" /> */}
       </div>
     </div>
