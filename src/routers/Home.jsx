@@ -13,7 +13,7 @@ export function Home() {
             Free<br /><span className="text-primary">Resume</span>
           </p>
         </div>
-        <Button variant="link">ThomasYacoub</Button>
+        <Button variant="link"><a href="https://github.com/thomasyacoup">ThomasYacoub</a></Button>
       </nav>
       <div className="overflow-hidden relative flex flex-col justify-center items-center gap-12 flex-1 bg-gray-300 border-border rounded-md bg-[radial-gradient(#e5e7eb_2px,transparent_1px)] bg-size-[32px_32px] ">
         <div className="p-2 bg-primary rounded-lg drop-shadow-[20px_20px_20px]">
