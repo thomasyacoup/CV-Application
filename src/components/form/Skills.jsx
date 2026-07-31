@@ -2,6 +2,10 @@ import { useState } from "react";
 import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
 import { DescriptionEditor } from "../ui/DescriptionEditor";
+import { CollapseButtton } from "../ui/CollapseButton";
+import { CollapseContainer } from "../ui/CollapseContainer";
+import { Field, FieldLabel } from "../ui/field";
+import { Button } from "../ui/button";
 
 function SkillsInfo({ onToggle, isActive }) {
   const { skills, setSkills } = useResume()
@@ -14,32 +18,21 @@ function SkillsInfo({ onToggle, isActive }) {
   }
 
   return (
-    <div className={isActive ? "active category" : "category"}>
-      <button
-        className="toggler"
-        onClick={() => {
-          if (isActive) {
-            onToggle("none");
-          } else {
-            onToggle("skills");
-          }
-        }}
-      >
+    <div>
+      <CollapseButtton isActive={isActive} onToggle={onToggle} sectionName={"skills"}>
         Skills
-      </button>
-      <div className="toggler-target">
+      </CollapseButtton>
+      <CollapseContainer isActive={isActive}>
         <form onSubmit={handleFormSubmit}>
-            <div className="form-flex">
-              <label>
-                Skills
-                <DescriptionEditor value={text} onChange={setText} />
-              </label>
-            </div>
-            <div className="btns-flex">
-              <input type="submit" value="add" className="save-btn" />
+            <Field className="p-4">
+                <FieldLabel>Description</FieldLabel>
+                <DescriptionEditor className="min-h-200" value={text} onChange={setText} />
+            </Field>
+            <div className="p-4 flex justify-end items-center">
+              <Button type="submit">Save</Button>
             </div>
           </form>
-      </div>
+      </CollapseContainer>
     </div>
   );
 }
