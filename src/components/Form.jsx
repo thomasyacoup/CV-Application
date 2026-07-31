@@ -37,13 +37,7 @@ function Forms() {
         isActive={toggle === "skills"}
         onToggle={setToggle}
       />
-
-      <Button
-        onClick={() => window.print()}
-      >
-        Download PDF
-      </Button>
-      
+      <hr />
     </div>
   );
 }
