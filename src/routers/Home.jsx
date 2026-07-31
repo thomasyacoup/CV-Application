@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { File } from "lucide-react";
+import { Link } from "react-router-dom"
 // import cvImage from "@/assets/cv-image.png"
 
 export function Home() {
