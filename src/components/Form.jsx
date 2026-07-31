@@ -1,11 +1,9 @@
 import PersonalInfo from "./form/Personal";
 import EducationInfo from "./form/Education";
-import "../styles/Form.css";
 import { useState } from "react";
 import SkillsInfo from "./form/Skills";
 import ProjectsInfo from "./form/Projects";
 import ExperienceInfo from "./form/Experience";
-import { Button } from "./ui/button";
 
 function Forms() {
   const [toggle, setToggle] = useState("None");
