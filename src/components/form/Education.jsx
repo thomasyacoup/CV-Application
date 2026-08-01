@@ -76,6 +76,8 @@ function EducationForm({onSubmit, onReset, school, setSchool, location, setLocat
 function EducationInfo({ isActive, onToggle }) {
   const { education, dispatchEducation } = useResume();
 
+  const [id, setId] = useState(crypto.randomUUID())
+  
   const [school, setSchool] = useState("");
   const [location, setLocation] = useState("");
   const [degree, setDegree] = useState("");
@@ -87,6 +89,7 @@ function EducationInfo({ isActive, onToggle }) {
   function resetStates() {
     setState("normal")
 
+    setId(crypto.randomUUID())
     setSchool("")
     setLocation("")
     setDegree("")
@@ -94,29 +97,30 @@ function EducationInfo({ isActive, onToggle }) {
     setEndDate("")
   }
 
-  function handleOptionClick(index) {
-    setSchool(education[index].school);
-    setLocation(education[index].location);
-    setDegree(education[index].degree);
-    setStartDate(education[index].startDate);
-    setEndDate(education[index].endDate);
-    setState(index);
+  function handleOptionClick(id) {
+    setId(id)
+    setSchool(education.find(item => item.id == id).school);
+    setLocation(education.find(item => item.id == id).location);
+    setDegree(education.find(item => item.id == id).degree);
+    setStartDate(education.find(item => item.id == id).startDate);
+    setEndDate(education.find(item => item.id == id).endDate);
+    setState(id);
   }
 
-  function handleOptionDelete(index) {
-    dispatchEducation({type: "REMOVE", payload: { index }})
+  function handleOptionDelete(id) {
+    dispatchEducation({type: "REMOVE", payload: { id }})
   }
 
   function handleEducationCreate(e) {
     e.preventDefault();
-    const newEducation = { school, location, degree ,startDate, endDate };
+    const newEducation = { id ,school, location, degree ,startDate, endDate };
     dispatchEducation({type: "ADD", payload: newEducation})
     resetStates()
   }
 
   function handleEditSubmit(e) {
     e.preventDefault();
-    dispatchEducation({type: "UPDATE", payload: { index: state, school, location, degree, startDate, endDate }})
+    dispatchEducation({type: "UPDATE", payload: { id, school, location, degree, startDate, endDate }})
     resetStates()
   }
 
@@ -129,17 +133,17 @@ function EducationInfo({ isActive, onToggle }) {
         {state === "normal" ? (
           <div className="flex flex-col">
             <div className="flex flex-col justify-start">
-              {education.map((item, index) => (
+              {education.map((item) => (
                 <Option
-                  key={index}
-                  handleClick={() => handleOptionClick(index)}
-                  handleDelete={() => handleOptionDelete(index)}
+                  key={item.id}
+                  handleClick={() => handleOptionClick(item.id)}
+                  handleDelete={() => handleOptionDelete(item.id)}
                   data={item}
                 />
               ))}
             </div>
             <div className="p-4">
-              <Button onClick={() => setState("new")} className={" float-end"}>
+              <Button onClick={() => setState("new")} className={"float-end"}>
                 New
               </Button>
             </div>

@@ -87,6 +87,8 @@ function ExperienceInfo({ onToggle, isActive }) {
 
   const { experience, dispatchExperience } = useResume()
 
+  const [id, setId] = useState(crypto.randomUUID())
+
   const [jobTitle, setJobTitle] = useState("")
   const [company, setCompany] = useState("")
   const [startDate, setStartDate] = useState("")
@@ -97,6 +99,8 @@ function ExperienceInfo({ onToggle, isActive }) {
 
   function resetStates() {
     setState("normal");
+
+    setId(crypto.randomUUID())
     
     setJobTitle("")
     setCompany("")
@@ -106,31 +110,32 @@ function ExperienceInfo({ onToggle, isActive }) {
     setDescription("")
   }
   
-  function handleOptionClick(index) {
-    setJobTitle(experience[index].jobTitle)
-    setCompany(experience[index].company)
-    setStartDate(experience[index].startDate)
-    setEndDate(experience[index].endDate)
-    setLocation(experience[index].location)
-    setDescription(experience[index].description)
+  function handleOptionClick(id) {
+    setId(id)
+    setJobTitle(experience.find(item => item.id == id).jobTitle)
+    setCompany(experience.find(item => item.id == id).company)
+    setStartDate(experience.find(item => item.id == id).startDate)
+    setEndDate(experience.find(item => item.id == id).endDate)
+    setLocation(experience.find(item => item.id == id).location)
+    setDescription(experience.find(item => item.id == id).description)
 
-    setState(index);
+    setState(id);
   }
 
-  function handleOptionDelete(index) {
-    dispatchExperience({type: "REMOVE", payload: { index }})
+  function handleOptionDelete(id) {
+    dispatchExperience({type: "REMOVE", payload: { id }})
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    const newExperience = { jobTitle, company, startDate, endDate, location, description };
+    const newExperience = { id ,jobTitle, company, startDate, endDate, location, description };
     dispatchExperience({type: "ADD", payload: newExperience})
     resetStates()
   }
 
   function handleEditSubmit(e) {
     e.preventDefault();
-    const newExperience = { index: state, jobTitle, company, startDate, endDate, location, description };
+    const newExperience = { id, jobTitle, company, startDate, endDate, location, description };
     dispatchExperience({type: "UPDATE", payload: newExperience})
     resetStates()
   }
@@ -144,12 +149,12 @@ function ExperienceInfo({ onToggle, isActive }) {
         {state === "normal" ? (
           <div className="flex flex-col">
             <div>
-              {experience.map((item, index) => (
+              {experience.map(item => (
                 <Option
                   display={item.display || "block"}
-                  key={index}
-                  handleClick={() => handleOptionClick(index)}
-                  handleDelete={() => handleOptionDelete(index)}
+                  key={item.id}
+                  handleClick={() => handleOptionClick(item.id)}
+                  handleDelete={() => handleOptionDelete(item.id)}
                   data={item}
                 />
               ))}

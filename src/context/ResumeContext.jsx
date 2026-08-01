@@ -4,16 +4,17 @@ import { createContext, useContext, useReducer, useState } from "react";
 const ResumeContext = createContext(null);
 
 export function ResumeProvider({ children }) {
-const [personalInfo, setPersonalInfo] = useState({
-    name: "Sarah Ahmed",
-    email: "sarah.ahmed.dev@gmail.com",
-    phone: "010-1234-5678",
-    github: "https://github.com/sarahahmed",
-    linkedin: "https://linkedin.com/in/sarah-ahmed-dev",
-  })
+  const [personalInfo, setPersonalInfo] = useState({
+      name: "Sarah Ahmed",
+      email: "sarah.ahmed.dev@gmail.com",
+      phone: "010-1234-5678",
+      github: "https://github.com/sarahahmed",
+      linkedin: "https://linkedin.com/in/sarah-ahmed-dev",
+    })
 
   const [education, dispatchEducation] = useReducer(publicReducer, [
     {
+      id: crypto.randomUUID(),
       school: "Cairo University",
       location: "Cairo, Egypt",
       degree: "Bachelor of Computer Science",
@@ -22,42 +23,48 @@ const [personalInfo, setPersonalInfo] = useState({
     },
   ])
 
-  const [experience, dispatchExperience] = useReducer(publicReducer, [{
-    jobTitle: "Senior Frontend Developer",
-    company: "Vezeeta",
-    location: "Cairo, Egypt",
-    startDate: "2022",
-    endDate: "Present",
-    description:
-    `Led migration of legacy codebase to React and TypeScript
-    Improved page load performance by 40% through code splitting and lazy loading
-    Mentored a team of 3 junior developers and conducted code reviews`
-  },
-  {
-    jobTitle: "Frontend Developer",
-    company: "Swvl",
-    location: "Cairo, Egypt",
-    startDate: "2020",
-    endDate: "2022",
-    description:
-    `Built and maintained customer-facing booking dashboard using Vue.js
-    Collaborated with backend team to design REST API contracts
-    Implemented automated testing that reduced production bugs by 25%`
-  },
-  {
-    jobTitle: "Software Engineering Intern",
-    company: "Instabug",
-    location: "Cairo, Egypt",
-    startDate: "2019",
-    endDate: "2020",
-    description:
-    `Assisted in developing internal tooling for bug tracking system
-    Wrote unit tests to improve code coverage
-    Participated in daily standups and sprint planning`
-  }])
+  const [experience, dispatchExperience] = useReducer(publicReducer, [
+    {
+      id: crypto.randomUUID(),
+      jobTitle: "Senior Frontend Developer",
+      company: "Vezeeta",
+      location: "Cairo, Egypt",
+      startDate: "2022",
+      endDate: "Present",
+      description:
+      `Led migration of legacy codebase to React and TypeScript
+      Improved page load performance by 40% through code splitting and lazy loading
+      Mentored a team of 3 junior developers and conducted code reviews`
+    },
+    {
+      id: crypto.randomUUID(),
+      jobTitle: "Frontend Developer",
+      company: "Swvl",
+      location: "Cairo, Egypt",
+      startDate: "2020",
+      endDate: "2022",
+      description:
+      `Built and maintained customer-facing booking dashboard using Vue.js
+      Collaborated with backend team to design REST API contracts
+      Implemented automated testing that reduced production bugs by 25%`
+    },
+    {
+      id: crypto.randomUUID(),
+      jobTitle: "Software Engineering Intern",
+      company: "Instabug",
+      location: "Cairo, Egypt",
+      startDate: "2019",
+      endDate: "2020",
+      description:
+      `Assisted in developing internal tooling for bug tracking system
+      Wrote unit tests to improve code coverage
+      Participated in daily standups and sprint planning`
+    }
+  ])
 
   const [projects, dispatchProjects] = useReducer(publicReducer, [
     {
+      id: crypto.randomUUID(),
       title: "TaskFlow",
       technologies: "React, Node.js, Express, MongoDB",
       date: "2023",
@@ -68,6 +75,7 @@ const [personalInfo, setPersonalInfo] = useState({
       url: "https://github.com/sarahahmed/taskflow"
     },
     {
+      id: crypto.randomUUID(),
       title: "ExpenseTracker",
       technologies: "Vue.js, Firebase, Tailwind CSS, REST API",
       date: "2022",

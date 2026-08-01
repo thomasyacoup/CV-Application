@@ -76,6 +76,8 @@ function ProjectsInfo({ onToggle, isActive }) {
   
   const [state, setState] = useState("normal");
 
+  const [id, setId] = useState(crypto.randomUUID())
+
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("")
   const [url, setUrl] = useState("")
@@ -84,6 +86,8 @@ function ProjectsInfo({ onToggle, isActive }) {
 
   function resetStates() {
     setState("normal")
+
+    setId(crypto.randomUUID())
     
     setTitle("")
     setDate("")
@@ -92,25 +96,27 @@ function ProjectsInfo({ onToggle, isActive }) {
     setDescription("")
   }
 
-  function handleOptionClick(index) {
-    setTitle(projects[index].title)
-    setDate(projects[index].date)
-    setUrl(projects[index].url)
-    setTechnologies(projects[index].technologies)
-    setDescription(projects[index].description)
+  function handleOptionClick(id) {
+    setId(id)
+    
+    setTitle(projects.find(item => item.id == id).title)
+    setDate(projects.find(item => item.id == id).date)
+    setUrl(projects.find(item => item.id == id).url)
+    setTechnologies(projects.find(item => item.id == id).technologies)
+    setDescription(projects.find(item => item.id == id).description)
 
-    setState(index);
+    setState(id);
   }
 
-  function handleOptionDelete(index) {
-    dispatchProjects({type: "REMOVE", payload: { index }})
+  function handleOptionDelete(id) {
+    dispatchProjects({type: "REMOVE", payload: { id }})
     resetStates()
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    const newProject = { title, date, url, technologies, description };
+    const newProject = { id, title, date, url, technologies, description };
     dispatchProjects({type: "ADD", payload: newProject})
     
     resetStates()
@@ -119,7 +125,7 @@ function ProjectsInfo({ onToggle, isActive }) {
   function handleEditSubmit(e) {
     e.preventDefault();
 
-    dispatchProjects({type: "UPDATE", payload: { index: state ,title, date, url, technologies, description }})
+    dispatchProjects({type: "UPDATE", payload: { id, title, date, url, technologies, description }})
     
     resetStates()
   }
@@ -133,12 +139,12 @@ function ProjectsInfo({ onToggle, isActive }) {
         {state === "normal" ? (
           <div className="flex flex-col">
             <div>
-              {projects.map((item, index) => (
+              {projects.map(item => (
                 <Option
                   display={item.display || "block"}
-                  key={index}
-                  handleClick={() => handleOptionClick(index)}
-                  handleDelete={() => handleOptionDelete(index)}
+                  key={item.id}
+                  handleClick={() => handleOptionClick(item.id)}
+                  handleDelete={() => handleOptionDelete(item.id)}
                   data={item}
                 />
               ))}
