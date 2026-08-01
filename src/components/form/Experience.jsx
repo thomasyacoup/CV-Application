@@ -65,7 +65,7 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
           ></Textarea>
         </Field>
       </FieldGroup>
-      <div className="btns-flex">
+      <div className="flex justify-end gap-4 p-4">
         <Button
           type="button"
           onClick={onReset}
@@ -73,7 +73,9 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
         >
           Cancel
         </Button>
-        <Button type="submit">Save</Button>
+        <Button type="submit">
+          Save
+        </Button>
       </div>
     </form>
   )
