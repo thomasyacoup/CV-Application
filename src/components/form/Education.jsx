@@ -7,9 +7,9 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 
-function EducationForm({handleSubmit, onReset, school, setSchool, location, setLocation, degree, setDegree, startDate, setStartDate, endDate, setEndDate}) {
+function EducationForm({onSubmit, onReset, school, setSchool, location, setLocation, degree, setDegree, startDate, setStartDate, endDate, setEndDate}) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <FieldGroup className="grid grid-cols-2 gap-4 p-4">
         <Field>
           <FieldLabel>School</FieldLabel>
@@ -65,7 +65,7 @@ function EducationForm({handleSubmit, onReset, school, setSchool, location, setL
           Cancel
         </Button>
         <Button type="submit">
-          Add
+          Save
         </Button>
       </div>
     </form>
