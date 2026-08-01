@@ -62,7 +62,7 @@ function EducationForm({handleSubmit, onReset, school, setSchool, location, setL
           onClick={onReset}
           variant="muted"
         >
-          Cansle
+          Cancel
         </Button>
         <Button type="submit">
           Add
