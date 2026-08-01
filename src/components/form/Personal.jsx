@@ -17,7 +17,6 @@ function PersonalInfo({ onToggle, isActive }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("hi")
     const data = { name, phone, email, github, linkedin };
 
     resumeData.setPersonalInfo(data);
