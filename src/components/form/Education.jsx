@@ -6,6 +6,7 @@ import { CollapseContainer } from "../ui/CollapseContainer";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
+import { ItemsView } from "../ui/ItemsView";
 
 function EducationForm({onSubmit, onReset, school, setSchool, location, setLocation, degree, setDegree, startDate, setStartDate, endDate, setEndDate}) {
   return (
@@ -131,23 +132,13 @@ function EducationInfo({ isActive, onToggle }) {
       </CollapseButtton>
       <CollapseContainer isActive={isActive}>
         {state === "normal" ? (
-          <div className="flex flex-col">
-            <div className="flex flex-col justify-start">
-              {education.map((item) => (
-                <Option
-                  key={item.id}
-                  handleClick={() => handleOptionClick(item.id)}
-                  handleDelete={() => handleOptionDelete(item.id)}
-                  data={item}
-                />
-              ))}
-            </div>
-            <div className="p-4">
-              <Button onClick={() => setState("new")} className={"float-end"}>
-                New
-              </Button>
-            </div>
-          </div>
+          <ItemsView 
+            items={education}
+            dispatchItems={dispatchEducation}
+            handleOptionClick={handleOptionClick}
+            handleOptionDelete={handleOptionDelete}
+            setState={setState}
+          />
         ) : state === "new" ? (
           <EducationForm 
             onSubmit={handleEducationCreate}

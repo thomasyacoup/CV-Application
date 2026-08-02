@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { ItemsView } from "../ui/ItemsView";
 
 function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, setUrl, technologies, setTechnologies, description, setDescription}) {
   return (
@@ -137,24 +138,13 @@ function ProjectsInfo({ onToggle, isActive }) {
       </CollapseButtton>
       <CollapseContainer isActive={isActive}>
         {state === "normal" ? (
-          <div className="flex flex-col">
-            <div>
-              {projects.map(item => (
-                <Option
-                  display={item.display || "block"}
-                  key={item.id}
-                  handleClick={() => handleOptionClick(item.id)}
-                  handleDelete={() => handleOptionDelete(item.id)}
-                  data={item}
-                />
-              ))}
-            </div>
-            <div className="p-4">
-              <Button onClick={() => setState("new")} className="float-right">
-                New
-              </Button>
-            </div>
-          </div>
+          <ItemsView 
+            items={projects}
+            dispatchItems={dispatchProjects}
+            handleOptionClick={handleOptionClick}
+            handleOptionDelete={handleOptionDelete}
+            setState={setState}
+          />
         ) : state === "new" ? (
           <ProjectsForm 
             onSubmit={handleFormSubmit}
