@@ -1,5 +1,6 @@
-import { Button } from "@base-ui/react";
 import { Reorder } from "motion/react";
+import Option from "../form/Option";
+import { Button } from "./button";
 
 export function ItemsView({items, dispatchItems, setState, handleOptionClick, handleOptionDelete}) {
   return (
