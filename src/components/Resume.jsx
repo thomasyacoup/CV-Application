@@ -1,4 +1,5 @@
 import { useResume } from "@/context/ResumeContext"
+import { dateFormatter } from "@/lib/dateFormatter";
 import { useLayoutEffect, useRef, useState } from "react";
 
 function Separator() {
@@ -74,7 +75,7 @@ export function Resume() {
               <h2 className="text-center font-bold font-serif text-3xl">
                 {personalInfo.name}
               </h2>
-              <div className="flex gap-1 text-[10.5px] font-serif justify-center">
+              <div className="flex gap-1 text-xs font-serif justify-center">
                 <span>{personalInfo.phone}</span>
                 <Separator />
                 <a href={personalInfo.email} className="underline">{personalInfo.email}</a>
@@ -93,7 +94,7 @@ export function Resume() {
                     <div className="flex flex-col">
                       <div className="flex justify-between text-sm font-serif font-semibold">
                         <h4>{item.school}</h4>
-                        <span>{item.startDate} - {item.endDate}</span>
+                        <span>{dateFormatter(item.startDate)} - {dateFormatter(item.endDate)}</span>
                       </div>
                       <div className="flex justify-between text-sm font-serif italic">
                         <h4>{item.degree}</h4>
