@@ -20,7 +20,7 @@ function Item({item, handleClick, handleDelete}) {
         </div>
         <div onClick={handleClick} role="button" className="p-2 flex-1 border-border border-x group hover:cursor-pointer">
           <button className="text-left group-hover:underline">
-            {item.school || item.category || item.title || item.jobTitle}
+            {item.school || item.category || item.title || item.company}
           </button>
         </div>
         <div className="p-2">
