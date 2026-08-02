@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
 import { CollapseButtton } from "../ui/CollapseButton";
 import { CollapseContainer } from "../ui/CollapseContainer";
@@ -7,6 +6,7 @@ import { Button } from "../ui/button";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { ItemsView } from "../ui/ItemsView";
 
 function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setCompany, startDate, setStartDate, endDate, setEndDate, location, setLocation,description, setDescription}) {
   return (
@@ -147,24 +147,13 @@ function ExperienceInfo({ onToggle, isActive }) {
       </CollapseButtton>
       <CollapseContainer isActive={isActive}>
         {state === "normal" ? (
-          <div className="flex flex-col">
-            <div>
-              {experience.map(item => (
-                <Option
-                  display={item.display || "block"}
-                  key={item.id}
-                  handleClick={() => handleOptionClick(item.id)}
-                  handleDelete={() => handleOptionDelete(item.id)}
-                  data={item}
-                />
-              ))}
-            </div>
-            <div className="p-4">
-              <Button onClick={() => setState("new")} className="float-right">
-                New
-              </Button>
-            </div>
-          </div>
+          <ItemsView 
+            items={experience}
+            dispatchItems={dispatchExperience}
+            setState={setState}
+            handleOptionClick={handleOptionClick}
+            handleOptionDelete={handleOptionDelete}
+          />
         ) : state === "new" ? (
           <ExperienceForm 
             onSubmit={handleFormSubmit}
