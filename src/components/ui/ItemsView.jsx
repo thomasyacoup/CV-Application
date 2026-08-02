@@ -1,8 +1,10 @@
-import { Reorder } from "motion/react";
+import { Reorder, useDragControls } from "motion/react";
 import Option from "../form/Option";
 import { Button } from "./button";
 
 export function ItemsView({items, dispatchItems, setState, handleOptionClick, handleOptionDelete}) {
+  const controls = useDragControls()
+  
   return (
     <div className="flex flex-col">
       <Reorder.Group
@@ -13,10 +15,13 @@ export function ItemsView({items, dispatchItems, setState, handleOptionClick, ha
       >
         {items.map(item => (
         <Reorder.Item
+          dragListener={false}
+          dragControls={controls}
           value={item}
           key={item.id}
         >
           <Option
+            controls={controls}
             display={item.display || "block"}
             handleClick={() => handleOptionClick(item.id)}
             handleDelete={() => handleOptionDelete(item.id)}

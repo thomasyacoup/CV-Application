@@ -1,10 +1,13 @@
 import { GripVertical } from "lucide-react";
 import { Button } from "../ui/button";
 
-function Option({ data, handleClick, handleDelete }) {
+function Option({ data, handleClick, handleDelete, controls }) {
   return (
     <div className="bg-white flex justify-between items-center border-b border-border">
-      <div className="cursor-grab p-2">
+      <div 
+        className="cursor-grab p-2"
+        onPointerDown={(e) => { e.preventDefault(); controls.start(e) }}
+      >
         <GripVertical className="text-gray-400 font size-4" />
       </div>
       <div onClick={handleClick} role="button" className="p-2 flex-1 border-border border-x group hover:cursor-pointer">
