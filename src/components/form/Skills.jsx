@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
 import { DescriptionEditor } from "../ui/DescriptionEditor";
 import { CollapseButtton } from "../ui/CollapseButton";

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Option from "./Option";
 import { useResume } from "@/context/ResumeContext";
 import { CollapseButtton } from "../ui/CollapseButton";
 import { CollapseContainer } from "../ui/CollapseContainer";
