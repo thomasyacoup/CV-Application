@@ -35,13 +35,13 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
           <div className="flex gap-2">
             <Input
               required
-              type="text"
+              type="month"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
             <Input
               required
-              type="text"
+              type="month"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />

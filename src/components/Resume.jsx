@@ -114,7 +114,7 @@ export function Resume() {
                     <div className="flex flex-col">
                       <div className="flex justify-between text-sm font-serif font-semibold">
                         <h4>{item.company}</h4>
-                        <span>{item.startDate} - {item.endDate}</span>
+                        <span>{dateFormatter(item.startDate)} - {dateFormatter(item.endDate)}</span>
                       </div>
                       <div className="flex justify-between text-sm font-serif italic">
                         <h4>{item.jobTitle}</h4>
@@ -145,7 +145,7 @@ export function Resume() {
                           <Separator />
                           <span className="italic ">{item.technologies}</span>
                         </div>
-                        <span className="">{item.date}</span>
+                        <span className="">{dateFormatter(item.date)}</span>
                       </div>
                       <ul className="list-disc list-inside pl-4 text-sm font-serif">
                         {

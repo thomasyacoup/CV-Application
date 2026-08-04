@@ -25,7 +25,7 @@ function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, s
           <FieldLabel>Date</FieldLabel>
           <Input
             required
-            type="text"
+            type="month"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />

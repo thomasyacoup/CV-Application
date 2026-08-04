@@ -18,8 +18,8 @@ export function ResumeProvider({ children }) {
       school: "Cairo University",
       location: "Cairo, Egypt",
       degree: "Bachelor of Computer Science",
-      startDate: "May 2016",
-      endDate: "Aug 2020",
+      startDate: "2016-08",
+      endDate: "2020-08",
     },
   ])
 
@@ -29,8 +29,8 @@ export function ResumeProvider({ children }) {
       jobTitle: "Senior Frontend Developer",
       company: "Vezeeta",
       location: "Cairo, Egypt",
-      startDate: "2022",
-      endDate: "Present",
+      startDate: "2022-01",
+      endDate: "2024-12",
       description:
       `Led migration of legacy codebase to React and TypeScript
       Improved page load performance by 40% through code splitting and lazy loading
@@ -41,8 +41,8 @@ export function ResumeProvider({ children }) {
       jobTitle: "Frontend Developer",
       company: "Swvl",
       location: "Cairo, Egypt",
-      startDate: "2020",
-      endDate: "2022",
+      startDate: "2020-01",
+      endDate: "2022-12",
       description:
       `Built and maintained customer-facing booking dashboard using Vue.js
       Collaborated with backend team to design REST API contracts
@@ -53,8 +53,8 @@ export function ResumeProvider({ children }) {
       jobTitle: "Software Engineering Intern",
       company: "Instabug",
       location: "Cairo, Egypt",
-      startDate: "2019",
-      endDate: "2020",
+      startDate: "2019-01",
+      endDate: "2020-01",
       description:
       `Assisted in developing internal tooling for bug tracking system
       Wrote unit tests to improve code coverage
@@ -67,7 +67,7 @@ export function ResumeProvider({ children }) {
       id: crypto.randomUUID(),
       title: "TaskFlow",
       technologies: "React, Node.js, Express, MongoDB",
-      date: "2023",
+      date: "2023-01",
       description:
       `Developed a full-stack task management platform for small teams
       Implemented a dynamic dashboard for visualizing project timelines
@@ -78,7 +78,7 @@ export function ResumeProvider({ children }) {
       id: crypto.randomUUID(),
       title: "ExpenseTracker",
       technologies: "Vue.js, Firebase, Tailwind CSS, REST API",
-      date: "2022",
+      date: "2022-02",
       description:
       `Built a personal finance tracking app with budget alerts
       Integrated real-time data sync using Firebase for seamless updates

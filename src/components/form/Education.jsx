@@ -39,17 +39,17 @@ function EducationForm({onSubmit, onReset, school, setSchool, location, setLocat
           />
         </Field>
         <Field>
-          <FieldLabel>Start & Graduation Date</FieldLabel>
+          <FieldLabel>Start & Graduation Date (or Expected)</FieldLabel>
           <div className="flex gap-2">
             <Input
               required
-              type="text"
+              type="month"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
             <Input
               required
-              type="text"
+              type="month"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
