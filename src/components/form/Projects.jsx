@@ -17,6 +17,7 @@ function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, s
           <Input
             required
             type="text"
+            placeholder="Project Name"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -26,6 +27,7 @@ function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, s
           <Input
             required
             type="month"
+            placeholder="YYYY-MM"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
@@ -35,6 +37,7 @@ function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, s
           <Input
             required
             type="url"
+            placeholder="https://example.com"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
@@ -44,6 +47,7 @@ function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, s
           <Input
             required
             type="text"
+            placeholder="React, Tailwind, Node"
             value={technologies}
             onChange={(e) => setTechnologies(e.target.value)}
           />
@@ -52,6 +56,7 @@ function ProjectsForm({onSubmit, onReset, title, setTitle, date, setDate, url, s
           <FieldLabel>Description</FieldLabel>
           <Textarea
             required
+            placeholder="Brief project summary"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></Textarea>

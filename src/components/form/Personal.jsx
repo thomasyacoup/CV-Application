@@ -37,6 +37,7 @@ function PersonalInfo({ onToggle, isActive }) {
                 <Input
                   required
                   type="text"
+                  placeholder="John Doe"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                 />
@@ -46,6 +47,7 @@ function PersonalInfo({ onToggle, isActive }) {
               <Input
                 required
                 type="text"
+                placeholder="0501234567"
                 onChange={(e) => setPhone(e.target.value)}
                 value={phone}
               />
@@ -55,6 +57,7 @@ function PersonalInfo({ onToggle, isActive }) {
               <Input
                 required
                 type="email"
+                placeholder="example@mail.com"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
@@ -64,6 +67,7 @@ function PersonalInfo({ onToggle, isActive }) {
               <Input
                 required
                 type="url"
+                placeholder="https://github.com/username"
                 onChange={(e) => setGithub(e.target.value)}
                 value={github}
               />
@@ -73,6 +77,7 @@ function PersonalInfo({ onToggle, isActive }) {
               <Input
                 required
                 type="url"
+                placeholder="https://linkedin.com/in/username"
                 onChange={(e) => setLinkedin(e.target.value)}
                 value={linkedin}
               />

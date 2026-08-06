@@ -18,6 +18,7 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
           <Input
             required
             type="text"
+            placeholder="Software Engineer"
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
           />
@@ -27,6 +28,7 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
           <Input
             required
             type="text"
+            placeholder="Example Ltd."
             value={company}
             onChange={(e) => setCompany(e.target.value)}
           />
@@ -37,6 +39,7 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
             <Input
               required
               type="month"
+              placeholder="Start"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
@@ -68,6 +71,7 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
           <Input
             required
             type="text"
+            placeholder="City, Country"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
@@ -76,6 +80,7 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
           <FieldLabel>Description</FieldLabel>
           <Textarea
             required
+            placeholder="Describe your role and achievements"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></Textarea>

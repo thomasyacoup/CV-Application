@@ -16,6 +16,7 @@ function EducationForm({onSubmit, onReset, school, setSchool, location, setLocat
           <Input
             required
             type="text"
+            placeholder="University of Example"
             value={school}
             onChange={(e) => setSchool(e.target.value)}
           />
@@ -25,6 +26,7 @@ function EducationForm({onSubmit, onReset, school, setSchool, location, setLocat
           <Input
             required
             type="text"
+            placeholder="City, Country"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
@@ -34,6 +36,7 @@ function EducationForm({onSubmit, onReset, school, setSchool, location, setLocat
           <Input
             required
             type="text"
+            placeholder="B.Sc. in Computer Science"
             value={degree}
             onChange={(e) => setDegree(e.target.value)}
           />
@@ -44,12 +47,14 @@ function EducationForm({onSubmit, onReset, school, setSchool, location, setLocat
             <Input
               required
               type="month"
+              placeholder="Start"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
             <Input
               required
               type="month"
+              placeholder="End"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
