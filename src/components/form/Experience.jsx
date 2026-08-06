@@ -7,8 +7,9 @@ import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { ItemsView } from "../ui/ItemsView";
+import { Checkbox } from "../ui/checkbox";
 
-function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setCompany, startDate, setStartDate, endDate, setEndDate, location, setLocation,description, setDescription}) {
+function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setCompany, startDate, setStartDate, endDate, setEndDate, location, setLocation,description, setDescription, isCurrent, setIsCurrent}) {
   return (
     <form onSubmit={onSubmit}>
       <FieldGroup className="grid grid-cols-2 gap-4 p-4">
@@ -30,20 +31,35 @@ function ExperienceForm({onSubmit, onReset, jobTitle, setJobTitle, company, setC
             onChange={(e) => setCompany(e.target.value)}
           />
         </Field>
-        <Field>
-          <FieldLabel>Start & End Date</FieldLabel>
-          <div className="flex gap-2">
+        <Field className={"grid gap-2 grid-cols-2"}>
+          <div className="flex flex-col gap-2 justify-between h-full">
+            <FieldLabel>Start & End Date</FieldLabel>
             <Input
               required
               type="month"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
+          </div>
+          <div className="flex flex-col gap-2 h-full justify-between">
+            <div className="flex gap-2 items-center">
+              <Checkbox
+                
+                checked={isCurrent}
+                onCheckedChange={() => {
+                  setIsCurrent(!isCurrent);
+                  setEndDate(!isCurrent ? "Present" : "");
+                }}
+              />
+              <FieldLabel className={"text-muted-foreground"}>Still Working</FieldLabel>
+            </div>
             <Input
-              required
-              type="month"
-              value={endDate}
+              required={!isCurrent}
+              type={isCurrent ? "text" : "month"}
+              value={isCurrent ? "Present" : endDate}
               onChange={(e) => setEndDate(e.target.value)}
+              disabled={isCurrent}
+              placeholder={isCurrent ? "Present" : "YYYY-MM"}
             />
           </div>
         </Field>
@@ -93,6 +109,7 @@ function ExperienceInfo({ onToggle, isActive }) {
   const [company, setCompany] = useState("")
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
+  const [isCurrent, setIsCurrent] = useState(false)
   const [location, setLocation] = useState("")
   const [description, setDescription] = useState("");
 
@@ -106,18 +123,22 @@ function ExperienceInfo({ onToggle, isActive }) {
     setCompany("")
     setStartDate("")
     setEndDate("")
+    setIsCurrent(false)
     setLocation("")
     setDescription("")
   }
   
   function handleOptionClick(id) {
     setId(id)
-    setJobTitle(experience.find(item => item.id == id).jobTitle)
-    setCompany(experience.find(item => item.id == id).company)
-    setStartDate(experience.find(item => item.id == id).startDate)
-    setEndDate(experience.find(item => item.id == id).endDate)
-    setLocation(experience.find(item => item.id == id).location)
-    setDescription(experience.find(item => item.id == id).description)
+    const selectedExperience = experience.find(item => item.id == id)
+
+    setJobTitle(selectedExperience.jobTitle)
+    setCompany(selectedExperience.company)
+    setStartDate(selectedExperience.startDate)
+    setEndDate(selectedExperience.endDate)
+    setIsCurrent(selectedExperience.endDate === "Present")
+    setLocation(selectedExperience.location)
+    setDescription(selectedExperience.description)
 
     setState(id);
   }
@@ -128,14 +149,16 @@ function ExperienceInfo({ onToggle, isActive }) {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    const newExperience = { id ,jobTitle, company, startDate, endDate, location, description };
+    const finalEndDate = isCurrent ? "Present" : endDate;
+    const newExperience = { id ,jobTitle, company, startDate, endDate: finalEndDate, location, description };
     dispatchExperience({type: "ADD", payload: newExperience})
     resetStates()
   }
 
   function handleEditSubmit(e) {
     e.preventDefault();
-    const newExperience = { id, jobTitle, company, startDate, endDate, location, description };
+    const finalEndDate = isCurrent ? "Present" : endDate;
+    const newExperience = { id, jobTitle, company, startDate, endDate: finalEndDate, location, description };
     dispatchExperience({type: "UPDATE", payload: newExperience})
     resetStates()
   }
@@ -170,6 +193,8 @@ function ExperienceInfo({ onToggle, isActive }) {
             setEndDate={setEndDate}
             description={description}
             setDescription={setDescription}
+            isCurrent={isCurrent}
+            setIsCurrent={setIsCurrent}
           />
         ) : (
           <ExperienceForm 
@@ -187,6 +212,8 @@ function ExperienceInfo({ onToggle, isActive }) {
             setEndDate={setEndDate}
             description={description}
             setDescription={setDescription}
+            isCurrent={isCurrent}
+            setIsCurrent={setIsCurrent}
           />
         )}     
       </CollapseContainer>
