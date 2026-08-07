@@ -198,7 +198,7 @@ function ResumeMock() {
           initial={{ opacity: 0, scale: 0.7, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ delay: 2.4, type: "spring", stiffness: 220, damping: 16 }}
-          className="absolute -bottom-4 -left-4 flex items-center gap-1.5 bg-foreground text-background text-xs font-mono px-3 py-2 rounded-xl shadow-lg z-20"
+          className="absolute bottom-4 right-4 flex items-center gap-1.5 bg-foreground text-background text-xs font-mono px-3 py-2 rounded-xl shadow-lg z-20"
         >
           <CheckCircle2 className="size-3.5 text-[#34D399]" />
           ATS 98%
