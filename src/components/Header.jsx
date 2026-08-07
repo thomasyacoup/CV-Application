@@ -13,7 +13,7 @@ export function Header() {
   return (
     <motion.header 
       variants={fadeDown}
-      className="h-12 col-span-2 bg-white rounded flex items-center justify-between p-2 print:hidden"
+      className="h-12 md:col-span-2 bg-white rounded flex items-center justify-between p-2 print:hidden"
     >
       <Link to="/home" className="flex items-center">
         <File className="text-primary size-8"/>

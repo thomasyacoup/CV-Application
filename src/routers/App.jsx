@@ -19,7 +19,7 @@ function App() {
       initial="hidden"
       animate="show"
       variants={container}
-      className="grid grid-cols-2 overflow-hidden h-dvh relative print:h-[297mm]! print:block! print:static! p-2 gap-2 bg-[#dddddd] print:p-0"
+      className="grid md:grid-cols-2 overflow-hidden md:h-dvh relative print:h-[297mm]! print:block! print:static! p-2 gap-2 bg-[#dddddd] print:p-0"
     >
       <Header />
       <Forms />
