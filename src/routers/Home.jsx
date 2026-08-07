@@ -303,9 +303,9 @@ export function Home() {
                   <ArrowRight className="size-4" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline">
-                See a Demo
-              </Button>
+              {/* <Button size="lg" variant="outline">
+               See a Demo 
+              </Button> */}
             </div>
           </div>
 
