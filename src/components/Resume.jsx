@@ -152,7 +152,7 @@ export function Resume() {
                     <div className="flex flex-col">
                       <div className="flex justify-between text-sm font-serif font-semibold">
                         <div className="flex gap-1">
-                          <h4>{item.title}</h4>
+                          <h4>{item.title} (<a href={item.url} className="underline">URL</a>)</h4>
                           <Separator />
                           <span className="italic ">{item.technologies}</span>
                         </div>
