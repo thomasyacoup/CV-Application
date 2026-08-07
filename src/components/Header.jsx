@@ -23,7 +23,7 @@ export function Header() {
         </h3>
       </Link>
       <div className="flex gap-2 items-center">
-        <a href="https://github.com/thomasyacoup">
+        <a href="https://github.com/thomasyacoup/CV-Application">
           <GitHubIcon className="size-8 fill-gray-700 hover:fill-black transition delay-50" />  
         </a>
         <Button

@@ -274,11 +274,11 @@ export function Home() {
         </div>
         <Button variant="link" asChild>
           <a
-            href="https://github.com/thomasyacoup"
+            href="https://github.com/thomasyacoup/CV-Application"
             className="flex items-center gap-1.5"
           >
             <GitHubIcon className="size-4" />
-            ThomasYacoub
+            source code
           </a>
         </Button>
       </nav>
@@ -430,15 +430,15 @@ export function Home() {
             </p>
           </div>
           <p className="text-xs text-muted-foreground font-mono">
-            © {new Date().getFullYear()} FreeResume
+                made by <a href="https://github.com/thomasyacoup" className="underline">ThomasYacoub</a>
           </p>
           <Button variant="link" asChild className="p-0 h-auto">
             <a
-              href="https://github.com/thomasyacoup"
+              href="https://github.com/thomasyacoup/CV-Application"
               className="flex items-center gap-1.5 text-sm"
             >
               <GitHubIcon className="size-4" />
-              ThomasYacoub
+                source code
             </a>
           </Button>
         </div>
