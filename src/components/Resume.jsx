@@ -1,6 +1,7 @@
 import { useResume } from "@/context/ResumeContext"
 import { dateFormatter } from "@/lib/dateFormatter";
 import { useLayoutEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 
 function Separator() {
   return <span>|</span>
@@ -66,8 +67,18 @@ function ResumePageScaler({ children }) {
 export function Resume() {
   const { personalInfo, education, experience, projects, skills } = useResume()
   
+
+  const fadeFromRight = {
+    hidden: { opacity: 0, x: 24 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+  
+  
   return (
-    <div className="rounded h-full overflow-y-scroll flex-1 scrollbar-none">
+    <motion.div
+      variants={fadeFromRight}
+      className="rounded h-full overflow-y-scroll flex-1 scrollbar-none"
+    >
       <ResumePageScaler>
         <div className="w-[210mm] min-h-[297mm]  bg-white">
           <main className="px-[18mm] py-[20mm] flex flex-col gap-6">
@@ -168,6 +179,6 @@ export function Resume() {
           </main>
         </div>
       </ResumePageScaler>
-    </div>
+    </motion.div>
   )
 }

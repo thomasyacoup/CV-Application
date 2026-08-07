@@ -1,10 +1,19 @@
 import { ArrowDownFromLine, File } from "lucide-react";
 import { Button } from "./ui/button";
 import { GitHubIcon } from "./ui/GithubIcon";
+import { motion } from "framer-motion";
 
 export function Header() {
+  const fadeDown = {
+    hidden: { opacity: 0, y: -16 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  };
+  
   return (
-    <header className="h-12 col-span-2 bg-white rounded flex items-center justify-between p-2 print:hidden">
+    <motion.header 
+      variants={fadeDown}
+      className="h-12 col-span-2 bg-white rounded flex items-center justify-between p-2 print:hidden"
+    >
       <div className="flex items-center">
         <File className="text-primary size-8"/>
         <h3 className="font-bold leading-none">
@@ -24,6 +33,6 @@ export function Header() {
           <ArrowDownFromLine />
         </Button>
       </div>
-    </header>
+    </motion.header>
   )
 }
