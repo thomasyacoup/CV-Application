@@ -1,22 +1,37 @@
 # CV Application
 
-This project is a web-based CV (Curriculum Vitae) application built using React. It allows users to create, edit, and manage their CVs interactively. The application is designed to be user-friendly and provides features for adding personal information, education, skills, projects, and work experience.
+A web-based resume builder focused on the classic **Jake's Resume** format (Overleaf's popular CS/software-engineering template), built as a hands-on project for learning React fundamentals — routing, `useReducer`, Context, and controlled forms — without leaning on state-management libraries.
 
-Go to the [website](https://cv-builder-three-sandy.vercel.app/) and make your CV NOW!
+**[Live demo →](https://cv-application-seven-pi.vercel.app/home)**
+
+<p align="center">
+  <img src="./src/assets/Free Resume-1.png   " alt="CV Application screenshot" width="700" />
+</p>
 
 ## Features
 
-- **Dynamic Form Management**: Add, edit, and delete sections such as Education, Skills, Projects, and Experience.
-- **Real-Time Updates**: Changes are reflected immediately in the CV preview.
-- **Responsive Design**: Optimized for both desktop and mobile devices.
-- **Customizable**: Easily extendable to include additional sections or features.
+- **Split-screen live preview** — edit your resume on the left, see the formatted result on the right, styled to match Jake's Resume layout.
+- **Section-based forms** — add, edit, and delete entries for Education, Experience, Projects, and Skills, each with its own collapsible form.
+- **Drag-to-reorder** — reorder entries within a section by dragging them into place.
+- **Rich text skills editor** — format the Skills section with a lightweight WYSIWYG editor.
+- **Print-ready export** — export straight to PDF using the browser's native print dialog (styled specifically for print, so it comes out clean with no UI chrome).
+- **Fully client-side** — no backend, no accounts, nothing leaves your browser.
 
-## Installation
+## Tech Stack
+
+- **React 19** — UI, all state managed with built-in hooks (`useState`, `useReducer`, `useContext`) rather than external state libraries.
+- **React Router (Data mode)** — routing via `createBrowserRouter`.
+- **Tailwind CSS + shadcn/ui** — styling and UI primitives.
+- **Motion** — animations and the drag-to-reorder interaction.
+- **React Quill** — rich text editing for the Skills section.
+- **Vite** — dev server and build tooling.
+
+## Getting Started
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/CV-Application.git
+   git clone https://github.com/thomasyacoup/CV-Application.git
    cd CV-Application
    ```
 
@@ -32,24 +47,42 @@ Go to the [website](https://cv-builder-three-sandy.vercel.app/) and make your CV
    npm run dev
    ```
 
-4. Open the application in your browser at `http://localhost:3000`.
+4. Open the app at the local URL Vite prints in your terminal (typically `http://localhost:5173`).
 
 ## Usage
 
-- Navigate through the different sections (Personal, Education, Skills, etc.) to add or edit information.
-- Use the "Save" button to save changes.
-- Preview your CV in real-time as you make updates.
+- Go to `/app` to open the builder (the `/home` route is the landing page).
+- Expand a section (Education, Experience, Projects, Skills) and fill in the form.
+- Hit **Save** on an entry to commit it — the preview on the right updates immediately after saving.
+- Drag entries within a section to reorder them.
+- Use the export button in the header to open your browser's print dialog and save as PDF.
 
-## Technologies Used
+> **Note:** Nothing is persisted yet — refreshing the page resets your data to the sample resume. Local storage support is planned.
 
-- **React**: For building the user interface.
-- **Vite**: For fast development and build tooling.
-- **CSS**: For styling the application.
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── form/          # One component per resume section (Education, Experience, Projects, Skills)
+│   ├── ui/             # shadcn/ui primitives + shared UI (collapsible sections, item lists)
+│   ├── Form.jsx         # Container that renders all section forms
+│   ├── Header.jsx       # Top bar (export/print action)
+│   └── Resume.jsx       # The live preview, styled to page dimensions for print
+├── context/
+│   └── ResumeContext.jsx  # Single source of truth for saved resume data
+├── reducers/
+│   └── educationReducer.js  # Shared add/update/remove/reorder reducer, reused across sections
+├── routers/
+│   ├── App.jsx           # Builder layout (forms + preview)
+│   └── Home.jsx          # Landing page
+└── router.jsx            # createBrowserRouter route definitions
+```
 
 ## Contributing
 
-Contributions are welcome! If you have suggestions or improvements, feel free to open an issue or submit a pull request.
+Contributions are welcome — feel free to open an issue or a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+MIT — see [LICENSE](./LICENSE) for details.
