@@ -102,7 +102,7 @@ export function Resume() {
               <div className="flex flex-col gap-1 pl-4">
                 {
                   education.map(item => (
-                    <div className="flex flex-col">
+                    <div key={item.id} className="flex flex-col">
                       <div className="flex justify-between text-sm font-serif font-semibold">
                         <h4>{item.school}</h4>
                         <span>{dateFormatter(item.startDate)} - {dateFormatter(item.endDate)}</span>
@@ -122,7 +122,7 @@ export function Resume() {
               <div className="flex flex-col gap-1 pl-4">
                 {
                   experience.map(item => (
-                    <div className="flex flex-col">
+                    <div key={item.id} className="flex flex-col">
                       <div className="flex justify-between text-sm font-serif font-semibold">
                         <h4>{item.company}</h4>
                         <span>{dateFormatter(item.startDate)} - {dateFormatter(item.endDate)}</span>
@@ -149,7 +149,7 @@ export function Resume() {
               <div className="flex flex-col gap-1 pl-4">
                 {
                   projects.map(item => (
-                    <div className="flex flex-col">
+                    <div key={item.id} className="flex flex-col">
                       <div className="flex justify-between text-sm font-serif font-semibold">
                         <div className="flex gap-1">
                           <h4>{item.title} (<a href={item.url} className="underline">URL</a>)</h4>
